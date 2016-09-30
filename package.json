@@ -5,7 +5,13 @@
   "main": "lib/index.js",
   "license": "MIT",
   "author": "Shopify Inc.",
-  "dependencies": {},
+  "dependencies": {
+    "babel-generator": "6.16.0",
+    "babel-template": "6.16.0",
+    "babylon": "6.11.2",
+    "get-stdin": "5.0.1",
+    "lodash.kebabcase": "4.1.1"
+  },
   "devDependencies": {
     "babel": "~6.5.2",
     "babel-cli": "~6.11.4",
