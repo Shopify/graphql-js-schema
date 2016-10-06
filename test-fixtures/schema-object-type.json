@@ -1,0 +1,381 @@
+{
+  "kind": "OBJECT",
+  "name": "Product",
+  "description": null,
+  "fields": [
+    {
+      "name": "collections",
+      "description": null,
+      "args": [
+        {
+          "name": "first",
+          "description": null,
+          "type": {
+            "kind": "NON_NULL",
+            "name": "Non-Null",
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "after",
+          "description": null,
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "reverse",
+          "description": null,
+          "type": {
+            "kind": "SCALAR",
+            "name": "Boolean",
+            "ofType": null
+          },
+          "defaultValue": "false"
+        }
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "OBJECT",
+          "name": "CollectionConnection",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "createdAt",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "DateTime",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "handle",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "SCALAR",
+        "name": "String",
+        "ofType": null
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "id",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "ID",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "images",
+      "description": null,
+      "args": [
+        {
+          "name": "first",
+          "description": "Truncate the array result to this size",
+          "type": {
+            "kind": "SCALAR",
+            "name": "Int",
+            "ofType": null
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "maxWidth",
+          "description": "Image width in pixels between 1 and 2048",
+          "type": {
+            "kind": "SCALAR",
+            "name": "Int",
+            "ofType": null
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "maxHeight",
+          "description": "Image width in pixels between 1 and 2048",
+          "type": {
+            "kind": "SCALAR",
+            "name": "Int",
+            "ofType": null
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "crop",
+          "description": "If specified, crop the image keeping the specified region",
+          "type": {
+            "kind": "ENUM",
+            "name": "CropRegion",
+            "ofType": null
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "scale",
+          "description": "Image size multiplier retina displays. Must be between 1 and 3",
+          "type": {
+            "kind": "SCALAR",
+            "name": "Int",
+            "ofType": null
+          },
+          "defaultValue": "1"
+        }
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "LIST",
+          "name": "List",
+          "ofType": {
+            "kind": "NON_NULL",
+            "name": "Non-Null",
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Image"
+            }
+          }
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "options",
+      "description": null,
+      "args": [
+        {
+          "name": "first",
+          "description": "Truncate the array result to this size",
+          "type": {
+            "kind": "SCALAR",
+            "name": "Int",
+            "ofType": null
+          },
+          "defaultValue": null
+        }
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "LIST",
+          "name": "List",
+          "ofType": {
+            "kind": "NON_NULL",
+            "name": "Non-Null",
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "ProductOption"
+            }
+          }
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "productType",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "SCALAR",
+        "name": "String",
+        "ofType": null
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "publishedAt",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "DateTime",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "tags",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "LIST",
+        "name": "List",
+        "ofType": {
+          "kind": "NON_NULL",
+          "name": "Non-Null",
+          "ofType": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "title",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "String",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "updatedAt",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "DateTime",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "variants",
+      "description": null,
+      "args": [
+        {
+          "name": "first",
+          "description": null,
+          "type": {
+            "kind": "NON_NULL",
+            "name": "Non-Null",
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "after",
+          "description": null,
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          },
+          "defaultValue": null
+        },
+        {
+          "name": "reverse",
+          "description": null,
+          "type": {
+            "kind": "SCALAR",
+            "name": "Boolean",
+            "ofType": null
+          },
+          "defaultValue": "false"
+        }
+      ],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "OBJECT",
+          "name": "ProductVariantConnection",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    },
+    {
+      "name": "vendor",
+      "description": null,
+      "args": [
+
+      ],
+      "type": {
+        "kind": "SCALAR",
+        "name": "String",
+        "ofType": null
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    }
+  ],
+  "inputFields": null,
+  "interfaces": [
+    {
+      "kind": "INTERFACE",
+      "name": "Node",
+      "ofType": null
+    }
+  ],
+  "enumValues": null,
+  "possibleTypes": null
+}

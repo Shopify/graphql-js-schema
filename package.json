@@ -5,7 +5,14 @@
   "main": "lib/index.js",
   "license": "MIT",
   "author": "Shopify Inc.",
-  "dependencies": {},
+  "dependencies": {
+    "babel-generator": "6.16.0",
+    "babel-template": "6.16.0",
+    "babel-types": "6.16.0",
+    "babylon": "6.11.2",
+    "get-stdin": "5.0.1",
+    "lodash.kebabcase": "4.1.1"
+  },
   "devDependencies": {
     "babel": "~6.5.2",
     "babel-cli": "~6.11.4",
@@ -14,11 +21,15 @@
     "babel-preset-shopify": "~13.0.0",
     "babel-register": "~6.11.6",
     "eslint": "~3.3.1",
+    "eslint-plugin-babel": "3.3.0",
+    "eslint-plugin-chai-expect": "1.1.1",
+    "eslint-plugin-mocha": "4.6.0",
+    "eslint-plugin-node": "2.1.2",
     "eslint-plugin-shopify": "~14.0.0",
     "mocha": "~3.0.2"
   },
   "scripts": {
-    "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/index.js",
+    "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/*",
     "prepublish": "babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 -c .eslintrc.json src/ test/",
     "lint-allow-warning": "eslint -c .eslintrc.json src/ test/"

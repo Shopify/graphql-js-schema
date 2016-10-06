@@ -1,0 +1,11 @@
+[
+  {
+    "name": "QueryRoot",
+    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"scalars\": {},\n  \"objects\": {\n    \"collection\": {\n      \"type\": \"Collection\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": [\"id\"]\n    },\n    \"product\": {\n      \"type\": \"Product\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": [\"id\"]\n    },\n    \"shop\": {\n      \"type\": \"Shop\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": []\n    }\n  },\n  \"connections\": {},\n  \"implementsNode\": false\n};\nexport default Object.freeze(QueryRoot);",
+    "path": "types/query-root.js"
+  },
+  {
+    "body": "\nimport QueryRoot from \"./types/query-root\";\nconst Schema = {};\nSchema[\"QueryRoot\"] = QueryRoot;\nexport default Object.freeze(Schema);",
+    "path": "schema.js"
+  }
+]
