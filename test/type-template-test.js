@@ -1,9 +1,8 @@
 import assert from 'assert';
+import generate from 'babel-generator';
 import getFixture from './get-fixture';
 
 import typeTemplate from '../src/type-template';
-
-import generate from 'babel-generator';
 
 suite('This will ensure that types can be generated and exported as standalone modules', () => {
   test('it exports types', () => {

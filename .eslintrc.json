@@ -1,4 +1,13 @@
 {
+  "rules": {
+    "newline-before-return": ["error"],
+    "newline-after-var": ["error", "always"],
+    "comma-dangle": ["error", "never"],
+    "promise/always-return": 0,
+    "node/shebang": 0,
+    "no-console": 0,
+    "no-sync": 0
+  },
   "extends": [
     "plugin:shopify/esnext",
     "plugin:shopify/node",

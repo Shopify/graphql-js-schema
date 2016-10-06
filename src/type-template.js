@@ -8,7 +8,7 @@ function buildDeclaration(replacements) {
 
   return template(`const TYPE_NAME_IDENTIFIER = ${JSON.stringify(object, null, 2)};`)(replacements);
 }
-const buildExport = template(`export default Object.freeze(TYPE_NAME_IDENTIFIER);`, {sourceType: 'module'});
+const buildExport = template('export default Object.freeze(TYPE_NAME_IDENTIFIER);', {sourceType: 'module'});
 
 export default function typeTemplate(type) {
   const replacements = {

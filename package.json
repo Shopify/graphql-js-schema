@@ -8,6 +8,7 @@
   "dependencies": {
     "babel-generator": "6.16.0",
     "babel-template": "6.16.0",
+    "babel-types": "6.16.0",
     "babylon": "6.11.2",
     "get-stdin": "5.0.1",
     "lodash.kebabcase": "4.1.1"

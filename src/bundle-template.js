@@ -5,9 +5,9 @@ import generate from 'babel-generator';
 import {parse} from 'babylon';
 
 function buildImport(replacements) {
-  const path = replacements.TYPE_MODULE_PATH.value;
+  const modulePath = replacements.TYPE_MODULE_PATH.value;
 
-  return template(`import TYPE_NAME_IDENTIFIER from "./${path}";`, {sourceType: 'module'})(replacements);
+  return template(`import TYPE_NAME_IDENTIFIER from "./${modulePath}";`, {sourceType: 'module'})(replacements);
 }
 const buildDeclaration = template('const BUNDLE_MODULE_NAME = {};');
 const buildModuleAssignment = template('BUNDLE_MODULE_NAME[TYPE_NAME] = TYPE_NAME_IDENTIFIER;');
@@ -25,15 +25,15 @@ export default function bundleTemplate(types, bundleModuleName) {
     };
   });
 
-  const imports = typeConfigs.map(typeConfig => buildImport(typeConfig));
+  const imports = typeConfigs.map((typeConfig) => buildImport(typeConfig));
   const declaration = buildDeclaration({BUNDLE_MODULE_NAME});
-  const assignments = typeConfigs.map(typeConfig => buildModuleAssignment(typeConfig));
+  const assignments = typeConfigs.map((typeConfig) => buildModuleAssignment(typeConfig));
   const moduleExport = buildExport({BUNDLE_MODULE_NAME});
 
   return parse(`
-    ${imports.map(ast => generate(ast).code).join('\n')}
+    ${imports.map((ast) => generate(ast).code).join('\n')}
     ${generate(declaration).code}
-    ${assignments.map(ast => generate(ast).code).join('\n')}
+    ${assignments.map((ast) => generate(ast).code).join('\n')}
     ${generate(moduleExport).code}
   `, {sourceType: 'module'});
 }

@@ -1,20 +1,14 @@
 import path from 'path';
 import dasherize from 'lodash.kebabcase';
+import generate from 'babel-generator';
 import isObject from './helpers/is-object';
 import isNotIntrospectionType from './helpers/is-not-introspection-type';
 import simplifyType from './simplify-type';
-import generate from 'babel-generator';
 import typeTemplate from './type-template';
 import bundleTemplate from './bundle-template';
 
-function exportTypesToFiles(types) {
-  return rest.map(typeToFile('types')).concat(typeToFile('.')(queryRoot));
-}
-
 function reportError(error) {
-  console.trace(error.stack);
-
-  process.exit(1);
+  throw error;
 }
 
 function yieldTypes(schema) {
@@ -38,7 +32,7 @@ function mapTypesToFiles(types) {
     return {
       name: type.name,
       body: generate(typeTemplate(type)).code,
-      path: filenameForType(type),
+      path: filenameForType(type)
     };
   });
 }
@@ -54,15 +48,16 @@ function injectBundle(bundleName) {
     });
 
     return typeFileMaps;
-  }
+  };
 }
 
 export default function generateSchemaModules(schema, bundleName) {
-  return Promise.resolve(schema)
-                .then(yieldTypes)
-                .then(filterTypes)
-                .then(simplifyTypes)
-                .then(mapTypesToFiles)
-                .then(injectBundle(bundleName))
-                .catch(reportError);
+  return Promise
+    .resolve(schema)
+    .then(yieldTypes)
+    .then(filterTypes)
+    .then(simplifyTypes)
+    .then(mapTypesToFiles)
+    .then(injectBundle(bundleName))
+    .catch(reportError);
 }

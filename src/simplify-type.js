@@ -20,7 +20,7 @@ function transformArgument(arg) {
 }
 
 function objectifyField(acc, field) {
-  const descriptor = Object.keys(field).filter(key => {
+  const descriptor = Object.keys(field).filter((key) => {
     return (key !== 'fieldName');
   }).reduce((descriptorAcc, key) => {
     descriptorAcc[key] = field[key];
@@ -45,19 +45,19 @@ export default function simplifyType(typeFromSchema) {
     };
   }
 
-  const fieldsWithBaseTypes = typeFromSchema.fields.map(field => {
-    return Object.assign({ baseType: getBaseType(field.type) }, field);
+  const fieldsWithBaseTypes = typeFromSchema.fields.map((field) => {
+    return Object.assign({baseType: getBaseType(field.type)}, field);
   });
 
-  const scalars = fieldsWithBaseTypes.filter(field => {
+  const scalars = fieldsWithBaseTypes.filter((field) => {
     return isScalar(field.baseType);
   });
 
-  const objects = fieldsWithBaseTypes.filter(field => {
+  const objects = fieldsWithBaseTypes.filter((field) => {
     return isObject(field.baseType) && !isConnection(field.baseType);
   });
 
-  const connections = fieldsWithBaseTypes.filter(field => {
+  const connections = fieldsWithBaseTypes.filter((field) => {
     return isConnection(field.baseType);
   });
 

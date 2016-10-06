@@ -1,9 +1,8 @@
 import assert from 'assert';
+import generate from 'babel-generator';
 import getFixture from './get-fixture';
 
 import bundleTemplate from '../src/bundle-template';
-
-import generate from 'babel-generator';
 
 suite('This will ensure that bundles can be generated', () => {
   test('it can handle single types', () => {
