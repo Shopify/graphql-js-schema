@@ -25,7 +25,7 @@
     "mocha": "~3.0.2"
   },
   "scripts": {
-    "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/index.js",
+    "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/*",
     "prepublish": "babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 -c .eslintrc.json src/ test/",
     "lint-allow-warning": "eslint -c .eslintrc.json src/ test/"
