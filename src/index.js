@@ -27,12 +27,12 @@ function filenameForType(type) {
   return path.join('types', `${dasherize(type.name)}.js`);
 }
 
-function mapTypesToFiles(types) {
-  return types.map((type) => {
+function mapTypesToFiles(simplifiedTypes) {
+  return simplifiedTypes.map((simplifiedType) => {
     return {
-      name: type.name,
-      body: generate(typeTemplate(type)).code,
-      path: filenameForType(type)
+      name: simplifiedType.name,
+      body: generate(typeTemplate(simplifiedType)).code,
+      path: filenameForType(simplifiedType)
     };
   });
 }
