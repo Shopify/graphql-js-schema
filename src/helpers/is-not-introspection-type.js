@@ -1,3 +1,3 @@
 export default function isNotIntrospectionType(typeDescriptor) {
-  return !typeDescriptor.name.match(/^__.+/);
+  return !typeDescriptor.name.startsWith('__');
 }
