@@ -101,5 +101,5 @@
       ]
     }
   },
-  "implementsNode": false
+  "implementsNode": true
 }
