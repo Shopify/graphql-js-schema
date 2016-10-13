@@ -1,7 +1,7 @@
 export default `
-usage: graphql-js-schema --schema-file ./schema.json --outdir graph --schema-bundle-name
+usage: graphql-js-schema --schema-file ./schema.json --outdir graph [--schema-bundle-name "Schema"]
 
-Fetch the json representation of a GraphQL Schema from a live server.
+Transform the json representation of a GraphQL Schema into es6 modules
 
 arguments:
  --help               Print this message
