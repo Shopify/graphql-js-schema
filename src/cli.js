@@ -20,21 +20,19 @@ const schema = JSON.parse(fs.readFileSync(args.schemaFile));
 graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
   mkdirp.sync(path.join(args.outdir, 'types'));
 
-  return new Promise((resolve) => {
-    const expectedWriteCount = files.length;
-    let writeCount = 0;
-
-    files.forEach((file) => {
-      fs.writeFile(path.join(args.outdir, file.path), file.body, () => {
-        console.log(`wroteFile: ${path.join(args.outdir, file.path)}`);
-        writeCount++;
-        if (writeCount === expectedWriteCount) {
-          resolve();
+  return Promise.all(files.map((file) => {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(path.join(args.outdir, file.path), file.body, (err) => {
+        if (err) {
+          reject(err);
+          return;
         }
+
+        console.log(`wroteFile: ${path.join(args.outdir, file.path)}`);
+        resolve();
       });
     });
-  });
-
+  }));
 }).catch((error) => {
   console.trace(error);
   process.exit(1);
