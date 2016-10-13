@@ -39,7 +39,7 @@ function mapTypesToFiles(simplifiedTypes) {
 
 function injectBundle(bundleName) {
   return function(typeFileMaps) {
-    const bundleAst = bundleTemplate(typeFileMaps, bundleName);
+    const bundleAst = bundleTemplate(typeFileMaps, bundleName.replace(' ', ''));
     const bundle = generate(bundleAst).code;
 
     typeFileMaps.push({

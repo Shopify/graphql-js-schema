@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Transforms the JSON representation of a GraphQL schema into a set of ES6 type modules.",
   "main": "lib/index.js",
+  "bin": "lib/cli.js",
   "license": "MIT",
   "author": "Shopify Inc.",
   "dependencies": {
@@ -11,22 +12,25 @@
     "babel-types": "6.16.0",
     "babylon": "6.11.2",
     "get-stdin": "5.0.1",
-    "lodash.kebabcase": "4.1.1"
+    "lodash.kebabcase": "4.1.1",
+    "minimist": "1.2.0",
+    "mkdirp": "0.5.1"
   },
   "devDependencies": {
-    "babel": "~6.5.2",
-    "babel-cli": "~6.11.4",
-    "babel-core": "~6.13.2",
-    "babel-plugin-add-shopify-header": "~1.0.5",
-    "babel-preset-shopify": "~13.0.0",
-    "babel-register": "~6.11.6",
-    "eslint": "~3.3.1",
+    "babel": "6.5.2",
+    "babel-cli": "6.11.4",
+    "babel-core": "6.13.2",
+    "babel-plugin-add-shopify-header": "1.0.5",
+    "babel-preset-shopify": "13.0.0",
+    "babel-register": "6.11.6",
+    "eslint": "3.3.1",
     "eslint-plugin-babel": "3.3.0",
     "eslint-plugin-chai-expect": "1.1.1",
     "eslint-plugin-mocha": "4.6.0",
     "eslint-plugin-node": "2.1.2",
-    "eslint-plugin-shopify": "~14.0.0",
-    "mocha": "~3.0.2"
+    "eslint-plugin-promise": "3.0.0",
+    "eslint-plugin-shopify": "14.0.0",
+    "mocha": "3.0.2"
   },
   "scripts": {
     "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/*",
