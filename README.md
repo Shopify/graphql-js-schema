@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/Shopify/graphql-js-schema-fetch.png?circle-token=93549bd063e7d394b231f147e68f2311dc871e8d)](https://circleci.com/gh/Shopify/graphql-js-schema)
+
 # graphql-js-schema
 
 Transforms the JSON representation of a GraphQL schema into a set of ES6 type modules.
@@ -7,62 +9,80 @@ Transforms the JSON representation of a GraphQL schema into a set of ES6 type mo
 - [Installation](#installation)
 - [Examples](#examples)
 - [API](#api)
-    + [`const instance = graphqlJsSchema([options])`](#const-instance-graphqljsschema-options)
-    + [`someFunction(variable, callback)`](#somefunction-variable-callback)
-    + [`anotherFunction()`](#anotherfunction)
+- [Schema Modules](#schema-modules)
 - [License](http://github.com/Shopify/graphql-js-schema/blob/master/LICENSE.md)
 
 ## Installation
+
 ```bash
-$ npm install graphql-js-schema
+$ npm install @shopify/graphql-js-schema
 ```
 
 ## Examples
 
-#### Example 1
+To transform a GraphQL schema file (as json) into a set of ES6 consumable
+modules, run the following command.
 
-Decribe Example 1. Stumptown selfies put a bird on it occupy, scenester ramps jean shorts next level kale chips seitan:
-
-```javascript
-import graphqlJsSchema from 'graphql-js-schema';
-
-/********************************/
-/********************************/
-/* -- PUT AN EXAMPLE IN HERE -- */
-/********************************/
-/********************************/
+```bash
+graphql-js-schema --schema-file ./schema.json --outdir schema --schema-bundle-name="Schema"
 ```
 
-#### Example 2
-
-Decribe Example 1. Stumptown selfies put a bird on it occupy, scenester ramps jean shorts next level kale chips seitan:
-
-```javascript
-import graphqlJsSchema from 'graphql-js-schema';
-
-/********************************/
-/********************************/
-/* -- PUT AN EXAMPLE IN HERE -- */
-/********************************/
-/********************************/
-```
+This will create a directory called schema, and a root module called `Schema` in
+the file `schema/schema.js`. It wall also collect all the non-scalar types in
+`schema/types`, and export them. The top level bundle exists for convenience,
+but you can consume these modules however you like.
 
 ## API
 
-#### `const instance = graphqlJsSchema([options]);`
+Exports one function that transforms a schema object into a list of files and
+their associated bodies.
 
-Options you can pass `graphqlJsSchema`:
-- `option1` - Replace with a description of option 1
-- `option2` - Replace with a description of option 2
-- `option3` - Replace with a description of option 2
+```javascript
+import graphqlJsSchema from 'graphql-js-schema';
 
-#### `instance.someFunction(variable, callback);`
+graphqlJsSchema(schemaHash, "BundleName").then((files) => {
+  // Do stuff with hashes in the format:
+  // {
+  //   path: 'types/product.js',
+  //   body: '...'
+  // }
+});
+```
 
-Replace with `someFunction` description. Hoodie post-ironic polaroid salvia, microdosing vice ethical etsy bushwick roof party swag. Farm-to-table humblebrag etsy neutra synth.
+## Schema Modules
 
-#### `instance.anotherFunction();`
+```javascript
 
-Replace with `anotherFunction` description. Tacos polaroid cronut trust fund mumblecore biodiesel viral hella helvetica actually organic. Stumptown selfies put a bird on it occupy, scenester ramps jean shorts next level kale chips seitan.
+import Schema from 'schema/schema';
+
+Schema.Product.name // => Product
+Schema.Product.implementsNode // => true
+
+// Types are separated into scalars, objects and connections.
+
+// Scalars:
+Schema.Product.scalars
+Schema.Product.scalars.handle
+Schema.Product.scalars.handle.type // => String
+Schema.Product.scalars.handle.kind // => SCALAR
+Schema.Product.scalars.handle.isList // => false
+Schema.Product.scalars.handle.args // => []
+
+// Objects
+Schema.Product.objects.images
+Schema.Product.objects.images.type // => Image
+Schema.Product.objects.images.kind // => OBJECT
+Schema.Product.objects.images.isList // => true
+Schema.Product.objects.images.args // => ["first", "maxWidth", "maxHeight", "crop", "scale"]
+
+// Connections
+Schema.Product.connections.collections
+Schema.Product.connections.collections.type // => CollectionConnection
+Schema.Product.connections.collections.kind // => OBJECT
+Schema.Product.connections.collections.isList // => false
+Schema.Product.connections.collections.args // => ["first", "after", "reverse"]
+
+```
 
 ## License
 
