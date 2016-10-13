@@ -25,6 +25,7 @@ graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
       fs.writeFile(path.join(args.outdir, file.path), file.body, (err) => {
         if (err) {
           reject(err);
+
           return;
         }
 
