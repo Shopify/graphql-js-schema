@@ -1,0 +1,23 @@
+{
+  "name": "Node",
+  "kind": "INTERFACE",
+  "scalars": {
+    "id": {
+      "type": "ID",
+      "kind": "SCALAR",
+      "isList": false,
+      "args": []
+    }
+  },
+  "objects": {
+  },
+  "connections": {
+  },
+  "implementsNode": false,
+  "possibleTypes": [
+    "Collection",
+    "Product",
+    "ProductOption",
+    "ProductVariant"
+  ]
+}

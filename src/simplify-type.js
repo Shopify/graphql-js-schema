@@ -1,5 +1,6 @@
 import isScalar from './helpers/is-scalar';
 import isObject from './helpers/is-object';
+import isInterface from './helpers/is-interface';
 import isConnection from './helpers/is-connection';
 import getBaseType from './helpers/get-base-type';
 import hasListType from './helpers/has-list-type';
@@ -61,7 +62,7 @@ export default function simplifyType(typeFromSchema) {
     return isConnection(field.baseType);
   });
 
-  return {
+  const simplifiedType = {
     name: typeFromSchema.name,
     kind: typeFromSchema.kind,
     scalars: scalars.map(transformField).reduce(objectifyField, {}),
@@ -69,4 +70,12 @@ export default function simplifyType(typeFromSchema) {
     connections: connections.map(transformField).reduce(objectifyField, {}),
     implementsNode: implementsNode(typeFromSchema)
   };
+
+  if (isInterface(typeFromSchema)) {
+    simplifiedType.possibleTypes = typeFromSchema.possibleTypes.map((possibleType) => {
+      return possibleType.name;
+    });
+  }
+
+  return simplifiedType;
 }
