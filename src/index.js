@@ -2,10 +2,15 @@ import path from 'path';
 import dasherize from 'lodash.kebabcase';
 import generate from 'babel-generator';
 import isObject from './helpers/is-object';
+import isInterface from './helpers/is-interface';
 import isNotIntrospectionType from './helpers/is-not-introspection-type';
 import simplifyType from './simplify-type';
 import typeTemplate from './type-template';
 import bundleTemplate from './bundle-template';
+
+function isObjectOrInterface(type) {
+  return isObject(type) || isInterface(type);
+}
 
 function reportError(error) {
   throw error;
@@ -16,7 +21,7 @@ function yieldTypes(schema) {
 }
 
 function filterTypes(types) {
-  return types.filter(isObject).filter(isNotIntrospectionType);
+  return types.filter(isObjectOrInterface).filter(isNotIntrospectionType);
 }
 
 function simplifyTypes(types) {

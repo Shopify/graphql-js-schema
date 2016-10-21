@@ -5,7 +5,12 @@
     "path": "types/query-root.js"
   },
   {
-    "body": "\nimport QueryRoot from \"./types/query-root\";\nconst Schema = {};\nSchema[\"QueryRoot\"] = QueryRoot;\nexport default Object.freeze(Schema);",
+    "name": "Node",
+    "body": "\nconst Node = {\n  \"name\": \"Node\",\n  \"kind\": \"INTERFACE\",\n  \"scalars\": {\n    \"id\": {\n      \"type\": \"ID\",\n      \"kind\": \"SCALAR\",\n      \"isList\": false,\n      \"args\": []\n    }\n  },\n  \"objects\": {},\n  \"connections\": {},\n  \"implementsNode\": false,\n  \"possibleTypes\": [\"Collection\", \"Product\", \"ProductOption\", \"ProductVariant\"]\n};\nexport default Object.freeze(Node);",
+    "path": "types/node.js"
+  },
+  {
+    "body": "\nimport QueryRoot from \"./types/query-root\";\nimport Node from \"./types/node\";\nconst Schema = {};\nSchema[\"QueryRoot\"] = QueryRoot;\nSchema[\"Node\"] = Node;\nexport default Object.freeze(Schema);",
     "path": "schema.js"
   }
 ]
