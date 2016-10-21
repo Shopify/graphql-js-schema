@@ -20,46 +20,55 @@ if (args.showHelp) {
 
 const schema = JSON.parse(fs.readFileSync(args.schemaFile));
 
-function writeFiles(outdir, files) {
+function logFileWrite(filePath) {
+  console.log(`wroteFile: ${filePath}`);
+}
+
+function writeFiles(outdir, files, quiet = false) {
   return Promise.all(files.map((file) => {
     return new Promise((resolve, reject) => {
       fs.writeFile(path.join(outdir, file.path), file.body, (err) => {
         if (err) {
-          console.log('bork');
-          console.log(err);
-          console.log('bork');
           reject(err);
 
           return;
         }
 
-        console.log(`wroteFile: ${path.join(outdir, file.path)}`);
+        if (!quiet) {
+          logFileWrite(path.join(outdir, file.path));
+        }
         resolve();
       });
     });
   }));
 }
 
-graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
+function rollupAndWriteBundle(schemaBundleName, outdir, files) {
+  const tmpDir = tmp.dirSync();
 
-  if (args.bundleOnly) {
-    const tmpDir = tmp.dirSync();
+  mkdirp.sync(path.join(tmpDir.name, 'types'));
 
-    mkdirp.sync(path.join(tmpDir.name, 'types'));
+  const entryFilename = `${dasherize(schemaBundleName)}.js`;
+  const entryFilePath = path.join(tmpDir.name, entryFilename);
+  const bundleFilePath = path.join(outdir, entryFilename);
 
-    const entryFilename = `${dasherize(args.schemaBundleName)}.js`
-    const entryFilePath = path.join(tmpDir.name, entryFilename);
-
-    return writeFiles(tmpDir.name, files).then(() => {
-      return rollup({
-        entry: entryFilePath
-      });
-    }).then((bundle) => {
-      return bundle.write({
-        format: 'es',
-        dest: path.join(args.outdir, entryFilename)
-      });
+  return writeFiles(tmpDir.name, files, true).then(() => {
+    return rollup({
+      entry: entryFilePath
     });
+  }).then((bundle) => {
+    return bundle.write({
+      format: 'es',
+      dest: bundleFilePath
+    });
+  }).then(() => {
+    logFileWrite(bundleFilePath);
+  });
+}
+
+graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
+  if (args.bundleOnly) {
+    return rollupAndWriteBundle(args.schemaBundleName, args.outdir, files);
   } else {
     mkdirp.sync(path.join(args.outdir, 'types'));
 
