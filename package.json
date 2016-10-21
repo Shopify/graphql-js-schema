@@ -14,7 +14,9 @@
     "get-stdin": "5.0.1",
     "lodash.kebabcase": "4.1.1",
     "minimist": "1.2.0",
-    "mkdirp": "0.5.1"
+    "mkdirp": "0.5.1",
+    "rollup": "0.36.3",
+    "tmp": "0.0.29"
   },
   "devDependencies": {
     "babel": "6.5.2",

@@ -10,6 +10,7 @@ export default function parseArgs(rawArgs) {
   return {
     schemaFile: args['schema-file'],
     outdir: args.outdir,
-    schemaBundleName: args['schema-bundle-name']
+    schemaBundleName: args['schema-bundle-name'],
+    bundleOnly: args['bundle-only']
   };
 }

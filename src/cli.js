@@ -3,6 +3,9 @@
 import fs from 'fs';
 import path from 'path';
 import mkdirp from 'mkdirp';
+import tmp from 'tmp';
+import {rollup} from 'rollup';
+import dasherize from 'lodash.kebabcase';
 
 import parseArgs from './parse-args';
 import help from './help';
@@ -17,23 +20,51 @@ if (args.showHelp) {
 
 const schema = JSON.parse(fs.readFileSync(args.schemaFile));
 
-graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
-  mkdirp.sync(path.join(args.outdir, 'types'));
-
+function writeFiles(outdir, files) {
   return Promise.all(files.map((file) => {
     return new Promise((resolve, reject) => {
-      fs.writeFile(path.join(args.outdir, file.path), file.body, (err) => {
+      fs.writeFile(path.join(outdir, file.path), file.body, (err) => {
         if (err) {
+          console.log('bork');
+          console.log(err);
+          console.log('bork');
           reject(err);
 
           return;
         }
 
-        console.log(`wroteFile: ${path.join(args.outdir, file.path)}`);
+        console.log(`wroteFile: ${path.join(outdir, file.path)}`);
         resolve();
       });
     });
   }));
+}
+
+graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
+
+  if (args.bundleOnly) {
+    const tmpDir = tmp.dirSync();
+
+    mkdirp.sync(path.join(tmpDir.name, 'types'));
+
+    const entryFilename = `${dasherize(args.schemaBundleName)}.js`
+    const entryFilePath = path.join(tmpDir.name, entryFilename);
+
+    return writeFiles(tmpDir.name, files).then(() => {
+      return rollup({
+        entry: entryFilePath
+      });
+    }).then((bundle) => {
+      return bundle.write({
+        format: 'es',
+        dest: path.join(args.outdir, entryFilename)
+      });
+    });
+  } else {
+    mkdirp.sync(path.join(args.outdir, 'types'));
+
+    return writeFiles(args.outdir, files);
+  }
 }).catch((error) => {
   console.trace(error);
   process.exit(1);
