@@ -11,6 +11,8 @@ import parseArgs from './parse-args';
 import help from './help';
 import graphqlJsSchema from './index';
 
+tmp.setGracefulCleanup();
+
 const args = parseArgs(process.argv.slice(2));
 
 if (args.showHelp) {
