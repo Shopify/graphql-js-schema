@@ -1,0 +1,48 @@
+{
+  "kind": "INTERFACE",
+  "name": "Node",
+  "description": null,
+  "fields": [
+    {
+      "name": "id",
+      "description": null,
+      "args": [],
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "ID",
+          "ofType": null
+        }
+      },
+      "isDeprecated": false,
+      "deprecationReason": null
+    }
+  ],
+  "inputFields": null,
+  "interfaces": null,
+  "enumValues": null,
+  "possibleTypes": [
+    {
+      "kind": "OBJECT",
+      "name": "Collection",
+      "ofType": null
+    },
+    {
+      "kind": "OBJECT",
+      "name": "Product",
+      "ofType": null
+    },
+    {
+      "kind": "OBJECT",
+      "name": "ProductOption",
+      "ofType": null
+    },
+    {
+      "kind": "OBJECT",
+      "name": "ProductVariant",
+      "ofType": null
+    }
+  ]
+}

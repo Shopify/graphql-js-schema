@@ -17,4 +17,11 @@ suite('This will ensure that we\'re destructuring types from the schema into typ
 
     assert.deepEqual(simplifyType(schemaScalarType), simplifiedScalar);
   });
+
+  test('it simplifies types of kind INTERFACE', () => {
+    const schemaInterfaceType = JSON.parse(getFixture('schema-interface-type.json'));
+    const simplifiedInterface = JSON.parse(getFixture('simplified-interface-type.json'));
+
+    assert.deepEqual(simplifyType(schemaInterfaceType), simplifiedInterface);
+  });
 });
