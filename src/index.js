@@ -20,7 +20,7 @@ function yieldTypes(schema) {
   return schema.data.__schema.types;
 }
 
-function filterTypes(types) {
+function filterSupportedTypes(types) {
   return types.filter(isObjectOrInterface).filter(isNotIntrospectionType);
 }
 
@@ -60,7 +60,7 @@ export default function generateSchemaModules(schema, bundleName) {
   return Promise
     .resolve(schema)
     .then(yieldTypes)
-    .then(filterTypes)
+    .then(filterSupportedTypes)
     .then(simplifyTypes)
     .then(mapTypesToFiles)
     .then(injectBundle(bundleName))
