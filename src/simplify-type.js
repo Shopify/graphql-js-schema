@@ -1,81 +1,51 @@
-import isScalar from './helpers/is-scalar';
-import isObject from './helpers/is-object';
-import isInterface from './helpers/is-interface';
-import isConnection from './helpers/is-connection';
-import getBaseType from './helpers/get-base-type';
-import hasListType from './helpers/has-list-type';
 import implementsNode from './helpers/implements-node';
 
-function transformField(field) {
-  return {
-    type: field.baseType.name,
-    kind: field.baseType.kind,
-    fieldName: field.name,
-    isList: hasListType(field.type),
-    args: (field.args || []).map(transformArgument)
-  };
-}
-
-function transformArgument(arg) {
-  return arg.name;
-}
-
-function objectifyField(acc, field) {
-  const descriptor = Object.keys(field).filter((key) => {
-    return (key !== 'fieldName');
-  }).reduce((descriptorAcc, key) => {
-    descriptorAcc[key] = field[key];
-
-    return descriptorAcc;
-  }, {});
-
-  acc[field.fieldName] = descriptor;
-
-  return acc;
-}
-
-export default function simplifyType(typeFromSchema) {
-  if (isScalar(typeFromSchema)) {
-    return {
-      name: typeFromSchema.name,
-      kind: typeFromSchema.kind,
-      scalars: [],
-      objects: [],
-      connections: [],
-      implementsNode: implementsNode(typeFromSchema)
-    };
+function getBaseTypeName(type) {
+  if (type.ofType) {
+    return getBaseTypeName(type.ofType);
+  } else {
+    return type.name;
   }
+}
 
-  const fieldsWithBaseTypes = typeFromSchema.fields.map((field) => {
-    return Object.assign({baseType: getBaseType(field.type)}, field);
-  });
+function fieldBaseTypesReducer(fieldBaseTypesIndex, field) {
+  fieldBaseTypesIndex[field.name] = getBaseTypeName(field.type);
 
-  const scalars = fieldsWithBaseTypes.filter((field) => {
-    return isScalar(field.baseType);
-  });
+  return fieldBaseTypesIndex;
+}
 
-  const objects = fieldsWithBaseTypes.filter((field) => {
-    return isObject(field.baseType) && !isConnection(field.baseType);
-  });
-
-  const connections = fieldsWithBaseTypes.filter((field) => {
-    return isConnection(field.baseType);
-  });
-
-  const simplifiedType = {
-    name: typeFromSchema.name,
-    kind: typeFromSchema.kind,
-    scalars: scalars.map(transformField).reduce(objectifyField, {}),
-    objects: objects.map(transformField).reduce(objectifyField, {}),
-    connections: connections.map(transformField).reduce(objectifyField, {}),
-    implementsNode: implementsNode(typeFromSchema)
-  };
-
-  if (isInterface(typeFromSchema)) {
-    simplifiedType.possibleTypes = typeFromSchema.possibleTypes.map((possibleType) => {
-      return possibleType.name;
-    });
+function fieldBaseTypes(type) {
+  if (type.fields) {
+    return type.fields.reduce(fieldBaseTypesReducer, {});
+  } else {
+    return {};
   }
+}
 
-  return simplifiedType;
+function possibleTypes(interfaceType) {
+  return interfaceType.possibleTypes.map((t) => t.name);
+}
+
+export default function simplifyType(type) {
+  switch (type.kind) {
+    case 'OBJECT':
+      return ({
+        name: type.name,
+        kind: type.kind,
+        fieldBaseTypes: fieldBaseTypes(type),
+        implementsNode: implementsNode(type)
+      });
+    case 'INTERFACE':
+      return ({
+        name: type.name,
+        kind: type.kind,
+        fieldBaseTypes: fieldBaseTypes(type),
+        possibleTypes: possibleTypes(type)
+      });
+    default:
+      return ({
+        name: type.name,
+        kind: type.kind
+      });
+  }
 }
