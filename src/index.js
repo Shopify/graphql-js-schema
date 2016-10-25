@@ -12,10 +12,6 @@ function isObjectOrInterface(type) {
   return isObject(type) || isInterface(type);
 }
 
-function reportError(error) {
-  throw error;
-}
-
 function yieldTypes(schema) {
   return schema.data.__schema.types;
 }
@@ -56,13 +52,17 @@ function injectBundle(bundleName) {
   };
 }
 
+
+function flow(arg, functions) {
+  return functions.reduce(((acc, fn) => fn(acc)), arg);
+}
+
 export default function generateSchemaModules(schema, bundleName) {
-  return Promise
-    .resolve(schema)
-    .then(yieldTypes)
-    .then(filterSupportedTypes)
-    .then(simplifyTypes)
-    .then(mapTypesToFiles)
-    .then(injectBundle(bundleName))
-    .catch(reportError);
+  return flow(schema, [
+    yieldTypes,
+    filterSupportedTypes,
+    simplifyTypes,
+    mapTypesToFiles,
+    injectBundle(bundleName)
+  ]);
 }

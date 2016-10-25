@@ -11,17 +11,6 @@ import parseArgs from './parse-args';
 import help from './help';
 import graphqlJsSchema from './index';
 
-tmp.setGracefulCleanup();
-
-const args = parseArgs(process.argv.slice(2));
-
-if (args.showHelp) {
-  console.log(help);
-  process.exit(0);
-}
-
-const schema = JSON.parse(fs.readFileSync(args.schemaFile));
-
 function logFileWrite(filePath) {
   console.log(`wroteFile: ${filePath}`);
 }
@@ -68,7 +57,20 @@ function rollupAndWriteBundle(schemaBundleName, outdir, files) {
   });
 }
 
-graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
+
+function runCli() {
+  tmp.setGracefulCleanup();
+
+  const args = parseArgs(process.argv.slice(2));
+
+  if (args.showHelp) {
+    console.log(help);
+    process.exit(0);
+  }
+
+  const schema = JSON.parse(fs.readFileSync(args.schemaFile));
+  const files = graphqlJsSchema(schema, args.schemaBundleName);
+
   if (args.bundleOnly) {
     return rollupAndWriteBundle(args.schemaBundleName, args.outdir, files);
   } else {
@@ -76,7 +78,9 @@ graphqlJsSchema(schema, args.schemaBundleName).then((files) => {
 
     return writeFiles(args.outdir, files);
   }
-}).catch((error) => {
+}
+
+runCli().catch((error) => {
   console.trace(error);
   process.exit(1);
 });
