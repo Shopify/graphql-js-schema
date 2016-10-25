@@ -3,6 +3,7 @@ import isObject from './helpers/is-object';
 import isInterface from './helpers/is-interface';
 import isConnection from './helpers/is-connection';
 import getBaseType from './helpers/get-base-type';
+import hasNonNullType from './helpers/has-non-null-type';
 import hasListType from './helpers/has-list-type';
 import implementsNode from './helpers/implements-node';
 
@@ -17,7 +18,22 @@ function transformField(field) {
 }
 
 function transformArgument(arg) {
-  return arg.name;
+  const typeFromSchema = getBaseType(arg.type);
+  const argTransformed = {
+    name: arg.name,
+    isNonNull: hasNonNullType(arg),
+    isList: hasListType(arg),
+    type: typeFromSchema.name,
+    kind: typeFromSchema.kind
+  };
+
+  if (isInterface(typeFromSchema)) {
+    argTransformed.possibleTypes = typeFromSchema.possibleTypes.map((possibleType) => {
+      return possibleType.name;
+    });
+  }
+
+  return argTransformed;
 }
 
 function objectifyField(acc, field) {

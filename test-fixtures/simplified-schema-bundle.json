@@ -1,7 +1,7 @@
 [
   {
     "name": "QueryRoot",
-    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"scalars\": {},\n  \"objects\": {\n    \"collection\": {\n      \"type\": \"Collection\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": [\"id\"]\n    },\n    \"product\": {\n      \"type\": \"Product\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": [\"id\"]\n    },\n    \"shop\": {\n      \"type\": \"Shop\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": []\n    }\n  },\n  \"connections\": {},\n  \"implementsNode\": false\n};\nexport default Object.freeze(QueryRoot);",
+    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"scalars\": {},\n  \"objects\": {\n    \"collection\": {\n      \"type\": \"Collection\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": [{\n        \"name\": \"id\",\n        \"isNonNull\": false,\n        \"isList\": false,\n        \"type\": \"ID\",\n        \"kind\": \"SCALAR\"\n      }]\n    },\n    \"product\": {\n      \"type\": \"Product\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": [{\n        \"name\": \"id\",\n        \"isNonNull\": false,\n        \"isList\": false,\n        \"type\": \"ID\",\n        \"kind\": \"SCALAR\"\n      }]\n    },\n    \"shop\": {\n      \"type\": \"Shop\",\n      \"kind\": \"OBJECT\",\n      \"isList\": false,\n      \"args\": []\n    }\n  },\n  \"connections\": {},\n  \"implementsNode\": false\n};\nexport default Object.freeze(QueryRoot);",
     "path": "types/query-root.js"
   },
   {

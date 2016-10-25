@@ -63,11 +63,41 @@
       "kind": "OBJECT",
       "isList": true,
       "args": [
-        "first",
-        "maxWidth",
-        "maxHeight",
-        "crop",
-        "scale"
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "first",
+          "type": "Int"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "maxWidth",
+          "type": "Int"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "maxHeight",
+          "type": "Int"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "ENUM",
+          "name": "crop",
+          "type": "CropRegion"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "scale",
+          "type": "Int"
+        }
       ]
     },
     "options": {
@@ -75,7 +105,13 @@
       "kind": "OBJECT",
       "isList": true,
       "args": [
-        "first"
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "first",
+          "type": "Int"
+        }
       ]
     }
   },
@@ -85,9 +121,27 @@
       "kind": "OBJECT",
       "isList": false,
       "args": [
-        "first",
-        "after",
-        "reverse"
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "first",
+          "type": "Int"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "after",
+          "type": "String"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "reverse",
+          "type": "Boolean"
+        }
       ]
     },
     "variants": {
@@ -95,9 +149,27 @@
       "kind": "OBJECT",
       "isList": false,
       "args": [
-        "first",
-        "after",
-        "reverse"
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "first",
+          "type": "Int"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "after",
+          "type": "String"
+        },
+        {
+          "isList": false,
+          "isNonNull": false,
+          "kind": "SCALAR",
+          "name": "reverse",
+          "type": "Boolean"
+        }
       ]
     }
   },
