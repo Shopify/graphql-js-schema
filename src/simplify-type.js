@@ -8,18 +8,12 @@ function getBaseTypeName(type) {
   }
 }
 
-function fieldBaseTypesReducer(fieldBaseTypesIndex, field) {
-  fieldBaseTypesIndex[field.name] = getBaseTypeName(field.type);
+function fieldBaseTypes(fields) {
+  return fields.reduce((acc, field) => {
+    acc[field.name] = getBaseTypeName(field.type);
 
-  return fieldBaseTypesIndex;
-}
-
-function fieldBaseTypes(type) {
-  if (type.fields) {
-    return type.fields.reduce(fieldBaseTypesReducer, {});
-  } else {
-    return {};
-  }
+    return acc;
+  }, {});
 }
 
 function possibleTypes(interfaceType) {
@@ -32,14 +26,14 @@ export default function simplifyType(type) {
       return ({
         name: type.name,
         kind: type.kind,
-        fieldBaseTypes: fieldBaseTypes(type),
+        fieldBaseTypes: fieldBaseTypes(type.fields),
         implementsNode: implementsNode(type)
       });
     case 'INTERFACE':
       return ({
         name: type.name,
         kind: type.kind,
-        fieldBaseTypes: fieldBaseTypes(type),
+        fieldBaseTypes: fieldBaseTypes(type.fields),
         possibleTypes: possibleTypes(type)
       });
     default:
