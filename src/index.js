@@ -1,23 +1,12 @@
 import path from 'path';
 import dasherize from 'lodash.kebabcase';
 import generate from 'babel-generator';
-import isObject from './helpers/is-object';
-import isInterface from './helpers/is-interface';
-import isNotIntrospectionType from './helpers/is-not-introspection-type';
 import simplifyType from './simplify-type';
 import typeTemplate from './type-template';
 import bundleTemplate from './bundle-template';
 
-function isObjectOrInterface(type) {
-  return isObject(type) || isInterface(type);
-}
-
 function yieldTypes(schema) {
   return schema.data.__schema.types;
-}
-
-function filterSupportedTypes(types) {
-  return types.filter(isObjectOrInterface).filter(isNotIntrospectionType);
 }
 
 function simplifyTypes(types) {
@@ -60,7 +49,6 @@ function flow(arg, functions) {
 export default function generateSchemaModules(schema, bundleName) {
   return flow(schema, [
     yieldTypes,
-    filterSupportedTypes,
     simplifyTypes,
     mapTypesToFiles,
     injectBundle(bundleName)

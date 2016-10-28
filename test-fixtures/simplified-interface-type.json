@@ -1,23 +1,13 @@
 {
   "name": "Node",
   "kind": "INTERFACE",
-  "scalars": {
-    "id": {
-      "type": "ID",
-      "kind": "SCALAR",
-      "isList": false,
-      "args": []
-    }
+  "fieldBaseTypes": {
+    "id": "ID"
   },
-  "objects": {
-  },
-  "connections": {
-  },
-  "implementsNode": false,
-  "possibleTypes": [
-    "Collection",
-    "Product",
-    "ProductOption",
-    "ProductVariant"
+  "possibleTypes": [                                                                                                                                                                              
+    "Collection",                                                                                                                                                                                  
+    "Product",                                                                                                                                                                                 
+    "ProductOption",                                                                                                                                                                               
+    "ProductVariant"                                                                                                                                                                              
   ]
 }
