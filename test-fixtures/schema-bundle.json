@@ -1,0 +1,236 @@
+[
+  {
+    "name": "QueryRoot",
+    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"collection\": \"Collection\",\n    \"node\": \"Node\",\n    \"product\": \"Product\",\n    \"shop\": \"Shop\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(QueryRoot);",
+    "path": "types/query-root.js"
+  },
+  {
+    "name": "Node",
+    "body": "\nconst Node = {\n  \"name\": \"Node\",\n  \"kind\": \"INTERFACE\",\n  \"fieldBaseTypes\": {\n    \"id\": \"ID\"\n  },\n  \"possibleTypes\": [\"ApiCustomerAccessToken\", \"Collection\", \"Product\", \"ProductOption\", \"ProductVariant\"]\n};\nexport default Object.freeze(Node);",
+    "path": "types/node.js"
+  },
+  {
+    "name": "ID",
+    "body": "\nconst ID = {\n  \"name\": \"ID\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(ID);",
+    "path": "types/id.js"
+  },
+  {
+    "name": "Shop",
+    "body": "\nconst Shop = {\n  \"name\": \"Shop\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"billingAddress\": \"Address\",\n    \"collections\": \"CollectionConnection\",\n    \"currencyCode\": \"CurrencyCode\",\n    \"description\": \"String\",\n    \"moneyFormat\": \"String\",\n    \"name\": \"String\",\n    \"primaryDomain\": \"Domain\",\n    \"products\": \"ProductConnection\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(Shop);",
+    "path": "types/shop.js"
+  },
+  {
+    "name": "Address",
+    "body": "\nconst Address = {\n  \"name\": \"Address\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"address1\": \"String\",\n    \"address2\": \"String\",\n    \"city\": \"String\",\n    \"company\": \"String\",\n    \"country\": \"String\",\n    \"countryCode\": \"String\",\n    \"firstName\": \"String\",\n    \"formatted\": \"String\",\n    \"lastName\": \"String\",\n    \"latitude\": \"Float\",\n    \"longitude\": \"Float\",\n    \"name\": \"String\",\n    \"phone\": \"String\",\n    \"province\": \"String\",\n    \"provinceCode\": \"String\",\n    \"zip\": \"String\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(Address);",
+    "path": "types/address.js"
+  },
+  {
+    "name": "String",
+    "body": "\nconst String = {\n  \"name\": \"String\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(String);",
+    "path": "types/string.js"
+  },
+  {
+    "name": "Float",
+    "body": "\nconst Float = {\n  \"name\": \"Float\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(Float);",
+    "path": "types/float.js"
+  },
+  {
+    "name": "Boolean",
+    "body": "\nconst Boolean = {\n  \"name\": \"Boolean\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(Boolean);",
+    "path": "types/boolean.js"
+  },
+  {
+    "name": "CurrencyCode",
+    "body": "\nconst CurrencyCode = {\n  \"name\": \"CurrencyCode\",\n  \"kind\": \"ENUM\"\n};\nexport default Object.freeze(CurrencyCode);",
+    "path": "types/currency-code.js"
+  },
+  {
+    "name": "Domain",
+    "body": "\nconst Domain = {\n  \"name\": \"Domain\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"host\": \"String\",\n    \"sslEnabled\": \"Boolean\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(Domain);",
+    "path": "types/domain.js"
+  },
+  {
+    "name": "CollectionConnection",
+    "body": "\nconst CollectionConnection = {\n  \"name\": \"CollectionConnection\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"edges\": \"CollectionEdge\",\n    \"pageInfo\": \"PageInfo\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(CollectionConnection);",
+    "path": "types/collection-connection.js"
+  },
+  {
+    "name": "PageInfo",
+    "body": "\nconst PageInfo = {\n  \"name\": \"PageInfo\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"hasNextPage\": \"Boolean\",\n    \"hasPreviousPage\": \"Boolean\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(PageInfo);",
+    "path": "types/page-info.js"
+  },
+  {
+    "name": "CollectionEdge",
+    "body": "\nconst CollectionEdge = {\n  \"name\": \"CollectionEdge\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"cursor\": \"String\",\n    \"node\": \"Collection\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(CollectionEdge);",
+    "path": "types/collection-edge.js"
+  },
+  {
+    "name": "Collection",
+    "body": "\nconst Collection = {\n  \"name\": \"Collection\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"handle\": \"String\",\n    \"id\": \"ID\",\n    \"products\": \"ProductConnection\",\n    \"title\": \"String\",\n    \"updatedAt\": \"DateTime\"\n  },\n  \"implementsNode\": true\n};\nexport default Object.freeze(Collection);",
+    "path": "types/collection.js"
+  },
+  {
+    "name": "DateTime",
+    "body": "\nconst DateTime = {\n  \"name\": \"DateTime\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(DateTime);",
+    "path": "types/date-time.js"
+  },
+  {
+    "name": "ProductConnection",
+    "body": "\nconst ProductConnection = {\n  \"name\": \"ProductConnection\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"edges\": \"ProductEdge\",\n    \"pageInfo\": \"PageInfo\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(ProductConnection);",
+    "path": "types/product-connection.js"
+  },
+  {
+    "name": "ProductEdge",
+    "body": "\nconst ProductEdge = {\n  \"name\": \"ProductEdge\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"cursor\": \"String\",\n    \"node\": \"Product\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(ProductEdge);",
+    "path": "types/product-edge.js"
+  },
+  {
+    "name": "Product",
+    "body": "\nconst Product = {\n  \"name\": \"Product\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"collections\": \"CollectionConnection\",\n    \"createdAt\": \"DateTime\",\n    \"handle\": \"String\",\n    \"id\": \"ID\",\n    \"images\": \"ImageConnection\",\n    \"options\": \"ProductOption\",\n    \"productType\": \"String\",\n    \"publishedAt\": \"DateTime\",\n    \"tags\": \"String\",\n    \"title\": \"String\",\n    \"updatedAt\": \"DateTime\",\n    \"variants\": \"ProductVariantConnection\",\n    \"vendor\": \"String\"\n  },\n  \"implementsNode\": true\n};\nexport default Object.freeze(Product);",
+    "path": "types/product.js"
+  },
+  {
+    "name": "Int",
+    "body": "\nconst Int = {\n  \"name\": \"Int\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(Int);",
+    "path": "types/int.js"
+  },
+  {
+    "name": "ImageConnection",
+    "body": "\nconst ImageConnection = {\n  \"name\": \"ImageConnection\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"edges\": \"ImageEdge\",\n    \"pageInfo\": \"PageInfo\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(ImageConnection);",
+    "path": "types/image-connection.js"
+  },
+  {
+    "name": "ImageEdge",
+    "body": "\nconst ImageEdge = {\n  \"name\": \"ImageEdge\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"cursor\": \"String\",\n    \"node\": \"Image\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(ImageEdge);",
+    "path": "types/image-edge.js"
+  },
+  {
+    "name": "Image",
+    "body": "\nconst Image = {\n  \"name\": \"Image\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"altText\": \"String\",\n    \"id\": \"ID\",\n    \"src\": \"URL\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(Image);",
+    "path": "types/image.js"
+  },
+  {
+    "name": "URL",
+    "body": "\nconst URL = {\n  \"name\": \"URL\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(URL);",
+    "path": "types/url.js"
+  },
+  {
+    "name": "CropRegion",
+    "body": "\nconst CropRegion = {\n  \"name\": \"CropRegion\",\n  \"kind\": \"ENUM\"\n};\nexport default Object.freeze(CropRegion);",
+    "path": "types/crop-region.js"
+  },
+  {
+    "name": "ProductOption",
+    "body": "\nconst ProductOption = {\n  \"name\": \"ProductOption\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"id\": \"ID\",\n    \"name\": \"String\",\n    \"values\": \"String\"\n  },\n  \"implementsNode\": true\n};\nexport default Object.freeze(ProductOption);",
+    "path": "types/product-option.js"
+  },
+  {
+    "name": "ProductVariantConnection",
+    "body": "\nconst ProductVariantConnection = {\n  \"name\": \"ProductVariantConnection\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"edges\": \"ProductVariantEdge\",\n    \"pageInfo\": \"PageInfo\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(ProductVariantConnection);",
+    "path": "types/product-variant-connection.js"
+  },
+  {
+    "name": "ProductVariantEdge",
+    "body": "\nconst ProductVariantEdge = {\n  \"name\": \"ProductVariantEdge\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"cursor\": \"String\",\n    \"node\": \"ProductVariant\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(ProductVariantEdge);",
+    "path": "types/product-variant-edge.js"
+  },
+  {
+    "name": "ProductVariant",
+    "body": "\nconst ProductVariant = {\n  \"name\": \"ProductVariant\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"available\": \"Boolean\",\n    \"id\": \"ID\",\n    \"images\": \"Image\",\n    \"price\": \"Money\",\n    \"selectedOptions\": \"SelectedOption\",\n    \"title\": \"String\",\n    \"weight\": \"Float\",\n    \"weightUnit\": \"WeightUnit\"\n  },\n  \"implementsNode\": true\n};\nexport default Object.freeze(ProductVariant);",
+    "path": "types/product-variant.js"
+  },
+  {
+    "name": "WeightUnit",
+    "body": "\nconst WeightUnit = {\n  \"name\": \"WeightUnit\",\n  \"kind\": \"ENUM\"\n};\nexport default Object.freeze(WeightUnit);",
+    "path": "types/weight-unit.js"
+  },
+  {
+    "name": "Money",
+    "body": "\nconst Money = {\n  \"name\": \"Money\",\n  \"kind\": \"SCALAR\"\n};\nexport default Object.freeze(Money);",
+    "path": "types/money.js"
+  },
+  {
+    "name": "SelectedOption",
+    "body": "\nconst SelectedOption = {\n  \"name\": \"SelectedOption\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"name\": \"String\",\n    \"value\": \"String\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(SelectedOption);",
+    "path": "types/selected-option.js"
+  },
+  {
+    "name": "CollectionSortKeys",
+    "body": "\nconst CollectionSortKeys = {\n  \"name\": \"CollectionSortKeys\",\n  \"kind\": \"ENUM\"\n};\nexport default Object.freeze(CollectionSortKeys);",
+    "path": "types/collection-sort-keys.js"
+  },
+  {
+    "name": "ProductSortKeys",
+    "body": "\nconst ProductSortKeys = {\n  \"name\": \"ProductSortKeys\",\n  \"kind\": \"ENUM\"\n};\nexport default Object.freeze(ProductSortKeys);",
+    "path": "types/product-sort-keys.js"
+  },
+  {
+    "name": "Mutation",
+    "body": "\nconst Mutation = {\n  \"name\": \"Mutation\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"apiCustomerAccessTokenCreate\": \"ApiCustomerAccessTokenCreatePayload\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(Mutation);",
+    "path": "types/mutation.js"
+  },
+  {
+    "name": "ApiCustomerAccessTokenCreatePayload",
+    "body": "\nconst ApiCustomerAccessTokenCreatePayload = {\n  \"name\": \"ApiCustomerAccessTokenCreatePayload\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"apiCustomerAccessToken\": \"ApiCustomerAccessToken\",\n    \"clientMutationId\": \"String\",\n    \"userErrors\": \"UserError\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(ApiCustomerAccessTokenCreatePayload);",
+    "path": "types/api-customer-access-token-create-payload.js"
+  },
+  {
+    "name": "UserError",
+    "body": "\nconst UserError = {\n  \"name\": \"UserError\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"field\": \"String\",\n    \"message\": \"String\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(UserError);",
+    "path": "types/user-error.js"
+  },
+  {
+    "name": "ApiCustomerAccessToken",
+    "body": "\nconst ApiCustomerAccessToken = {\n  \"name\": \"ApiCustomerAccessToken\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"accessToken\": \"String\",\n    \"expiresAt\": \"DateTime\",\n    \"id\": \"ID\"\n  },\n  \"implementsNode\": true\n};\nexport default Object.freeze(ApiCustomerAccessToken);",
+    "path": "types/api-customer-access-token.js"
+  },
+  {
+    "name": "ApiCustomerAccessTokenCreateInput",
+    "body": "\nconst ApiCustomerAccessTokenCreateInput = {\n  \"name\": \"ApiCustomerAccessTokenCreateInput\",\n  \"kind\": \"INPUT_OBJECT\"\n};\nexport default Object.freeze(ApiCustomerAccessTokenCreateInput);",
+    "path": "types/api-customer-access-token-create-input.js"
+  },
+  {
+    "name": "__Schema",
+    "body": "\nconst __Schema = {\n  \"name\": \"__Schema\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"directives\": \"__Directive\",\n    \"mutationType\": \"__Type\",\n    \"queryType\": \"__Type\",\n    \"subscriptionType\": \"__Type\",\n    \"types\": \"__Type\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(__Schema);",
+    "path": "types/schema.js"
+  },
+  {
+    "name": "__Type",
+    "body": "\nconst __Type = {\n  \"name\": \"__Type\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"description\": \"String\",\n    \"enumValues\": \"__EnumValue\",\n    \"fields\": \"__Field\",\n    \"inputFields\": \"__InputValue\",\n    \"interfaces\": \"__Type\",\n    \"kind\": \"__TypeKind\",\n    \"name\": \"String\",\n    \"ofType\": \"__Type\",\n    \"possibleTypes\": \"__Type\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(__Type);",
+    "path": "types/type.js"
+  },
+  {
+    "name": "__TypeKind",
+    "body": "\nconst __TypeKind = {\n  \"name\": \"__TypeKind\",\n  \"kind\": \"ENUM\"\n};\nexport default Object.freeze(__TypeKind);",
+    "path": "types/type-kind.js"
+  },
+  {
+    "name": "__Field",
+    "body": "\nconst __Field = {\n  \"name\": \"__Field\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"args\": \"__InputValue\",\n    \"deprecationReason\": \"String\",\n    \"description\": \"String\",\n    \"isDeprecated\": \"Boolean\",\n    \"name\": \"String\",\n    \"type\": \"__Type\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(__Field);",
+    "path": "types/field.js"
+  },
+  {
+    "name": "__InputValue",
+    "body": "\nconst __InputValue = {\n  \"name\": \"__InputValue\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"defaultValue\": \"String\",\n    \"description\": \"String\",\n    \"name\": \"String\",\n    \"type\": \"__Type\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(__InputValue);",
+    "path": "types/input-value.js"
+  },
+  {
+    "name": "__EnumValue",
+    "body": "\nconst __EnumValue = {\n  \"name\": \"__EnumValue\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"deprecationReason\": \"String\",\n    \"description\": \"String\",\n    \"isDeprecated\": \"Boolean\",\n    \"name\": \"String\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(__EnumValue);",
+    "path": "types/enum-value.js"
+  },
+  {
+    "name": "__Directive",
+    "body": "\nconst __Directive = {\n  \"name\": \"__Directive\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"args\": \"__InputValue\",\n    \"description\": \"String\",\n    \"locations\": \"__DirectiveLocation\",\n    \"name\": \"String\",\n    \"onField\": \"Boolean\",\n    \"onFragment\": \"Boolean\",\n    \"onOperation\": \"Boolean\"\n  },\n  \"implementsNode\": false\n};\nexport default Object.freeze(__Directive);",
+    "path": "types/directive.js"
+  },
+  {
+    "name": "__DirectiveLocation",
+    "body": "\nconst __DirectiveLocation = {\n  \"name\": \"__DirectiveLocation\",\n  \"kind\": \"ENUM\"\n};\nexport default Object.freeze(__DirectiveLocation);",
+    "path": "types/directive-location.js"
+  },
+  {
+    "body": "\nimport QueryRoot from \"./types/query-root\";\nimport Node from \"./types/node\";\nimport ID from \"./types/id\";\nimport Shop from \"./types/shop\";\nimport Address from \"./types/address\";\nimport String from \"./types/string\";\nimport Float from \"./types/float\";\nimport Boolean from \"./types/boolean\";\nimport CurrencyCode from \"./types/currency-code\";\nimport Domain from \"./types/domain\";\nimport CollectionConnection from \"./types/collection-connection\";\nimport PageInfo from \"./types/page-info\";\nimport CollectionEdge from \"./types/collection-edge\";\nimport Collection from \"./types/collection\";\nimport DateTime from \"./types/date-time\";\nimport ProductConnection from \"./types/product-connection\";\nimport ProductEdge from \"./types/product-edge\";\nimport Product from \"./types/product\";\nimport Int from \"./types/int\";\nimport ImageConnection from \"./types/image-connection\";\nimport ImageEdge from \"./types/image-edge\";\nimport Image from \"./types/image\";\nimport URL from \"./types/url\";\nimport CropRegion from \"./types/crop-region\";\nimport ProductOption from \"./types/product-option\";\nimport ProductVariantConnection from \"./types/product-variant-connection\";\nimport ProductVariantEdge from \"./types/product-variant-edge\";\nimport ProductVariant from \"./types/product-variant\";\nimport WeightUnit from \"./types/weight-unit\";\nimport Money from \"./types/money\";\nimport SelectedOption from \"./types/selected-option\";\nimport CollectionSortKeys from \"./types/collection-sort-keys\";\nimport ProductSortKeys from \"./types/product-sort-keys\";\nimport Mutation from \"./types/mutation\";\nimport ApiCustomerAccessTokenCreatePayload from \"./types/api-customer-access-token-create-payload\";\nimport UserError from \"./types/user-error\";\nimport ApiCustomerAccessToken from \"./types/api-customer-access-token\";\nimport ApiCustomerAccessTokenCreateInput from \"./types/api-customer-access-token-create-input\";\nimport __Schema from \"./types/schema\";\nimport __Type from \"./types/type\";\nimport __TypeKind from \"./types/type-kind\";\nimport __Field from \"./types/field\";\nimport __InputValue from \"./types/input-value\";\nimport __EnumValue from \"./types/enum-value\";\nimport __Directive from \"./types/directive\";\nimport __DirectiveLocation from \"./types/directive-location\";\nconst Schema = {};\nSchema[\"QueryRoot\"] = QueryRoot;\nSchema[\"Node\"] = Node;\nSchema[\"ID\"] = ID;\nSchema[\"Shop\"] = Shop;\nSchema[\"Address\"] = Address;\nSchema[\"String\"] = String;\nSchema[\"Float\"] = Float;\nSchema[\"Boolean\"] = Boolean;\nSchema[\"CurrencyCode\"] = CurrencyCode;\nSchema[\"Domain\"] = Domain;\nSchema[\"CollectionConnection\"] = CollectionConnection;\nSchema[\"PageInfo\"] = PageInfo;\nSchema[\"CollectionEdge\"] = CollectionEdge;\nSchema[\"Collection\"] = Collection;\nSchema[\"DateTime\"] = DateTime;\nSchema[\"ProductConnection\"] = ProductConnection;\nSchema[\"ProductEdge\"] = ProductEdge;\nSchema[\"Product\"] = Product;\nSchema[\"Int\"] = Int;\nSchema[\"ImageConnection\"] = ImageConnection;\nSchema[\"ImageEdge\"] = ImageEdge;\nSchema[\"Image\"] = Image;\nSchema[\"URL\"] = URL;\nSchema[\"CropRegion\"] = CropRegion;\nSchema[\"ProductOption\"] = ProductOption;\nSchema[\"ProductVariantConnection\"] = ProductVariantConnection;\nSchema[\"ProductVariantEdge\"] = ProductVariantEdge;\nSchema[\"ProductVariant\"] = ProductVariant;\nSchema[\"WeightUnit\"] = WeightUnit;\nSchema[\"Money\"] = Money;\nSchema[\"SelectedOption\"] = SelectedOption;\nSchema[\"CollectionSortKeys\"] = CollectionSortKeys;\nSchema[\"ProductSortKeys\"] = ProductSortKeys;\nSchema[\"Mutation\"] = Mutation;\nSchema[\"ApiCustomerAccessTokenCreatePayload\"] = ApiCustomerAccessTokenCreatePayload;\nSchema[\"UserError\"] = UserError;\nSchema[\"ApiCustomerAccessToken\"] = ApiCustomerAccessToken;\nSchema[\"ApiCustomerAccessTokenCreateInput\"] = ApiCustomerAccessTokenCreateInput;\nSchema[\"__Schema\"] = __Schema;\nSchema[\"__Type\"] = __Type;\nSchema[\"__TypeKind\"] = __TypeKind;\nSchema[\"__Field\"] = __Field;\nSchema[\"__InputValue\"] = __InputValue;\nSchema[\"__EnumValue\"] = __EnumValue;\nSchema[\"__Directive\"] = __Directive;\nSchema[\"__DirectiveLocation\"] = __DirectiveLocation;\nexport default Object.freeze(Schema);",
+    "path": "schema.js"
+  }
+]
