@@ -1,0 +1,85 @@
+{
+  "kind": "INPUT_OBJECT",
+  "name": "InputThing",
+  "description": null,
+  "fields": null,
+  "inputFields": [
+    {
+      "name": "string",
+      "description": null,
+      "type": {
+        "kind": "SCALAR",
+        "name": "String",
+        "ofType": null
+      },
+      "defaultValue": null
+    },
+    {
+      "name": "stringNonNull",
+      "description": null,
+      "type": {
+        "kind": "NON_NULL",
+        "name": "Non-Null",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "String",
+          "ofType": null
+        }
+      },
+      "defaultValue": null
+    },
+    {
+      "name": "list",
+      "description": null,
+      "type": {
+        "kind": "LIST",
+        "name": "List",
+        "ofType": {
+          "kind": "SCALAR",
+          "name": "String",
+          "ofType": null
+        }
+      },
+      "defaultValue": null
+    },
+    {
+      "name": "listNonNull",
+      "description": null,
+      "type": {
+        "kind": "LIST",
+        "name": "List",
+        "ofType": {
+          "kind": "NON_NULL",
+          "name": "Non-Null",
+          "ofType": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        }
+      },
+      "defaultValue": null
+    },
+    {
+      "name": "list2D",
+      "description": null,
+      "type": {
+        "kind": "LIST",
+        "name": "List",
+        "ofType": {
+          "kind": "LIST",
+          "name": "List",
+          "ofType": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        }
+      },
+      "defaultValue": null
+    }
+  ],
+  "interfaces": null,
+  "enumValues": null,
+  "possibleTypes": null
+}
