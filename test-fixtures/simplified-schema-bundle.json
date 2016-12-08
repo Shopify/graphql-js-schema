@@ -10,7 +10,7 @@
     "path": "types/node.js"
   },
   {
-    "body": "\nimport QueryRoot from \"./types/query-root\";\nimport Node from \"./types/node\";\nconst Schema = {};\nSchema[\"QueryRoot\"] = QueryRoot;\nSchema[\"Node\"] = Node;\nexport default Object.freeze(Schema);",
+    "body": "\nimport QueryRoot from \"./types/query-root\";\nimport Node from \"./types/node\";\nconst Schema = {\n  types: {}\n};\nSchema.types[\"QueryRoot\"] = QueryRoot;\nSchema.types[\"Node\"] = Node;\nObject.freeze(Schema.types);\nexport default Object.freeze(Schema);",
     "path": "schema.js"
   }
 ]

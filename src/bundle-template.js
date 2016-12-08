@@ -9,8 +9,9 @@ function buildImport(replacements) {
 
   return template(`import TYPE_NAME_IDENTIFIER from "./${modulePath}";`, {sourceType: 'module'})(replacements);
 }
-const buildDeclaration = template('const BUNDLE_MODULE_NAME = {};');
-const buildModuleAssignment = template('BUNDLE_MODULE_NAME[TYPE_NAME] = TYPE_NAME_IDENTIFIER;');
+const buildDeclaration = template('const BUNDLE_MODULE_NAME = {types: {}};');
+const buildModuleAssignment = template('BUNDLE_MODULE_NAME.types[TYPE_NAME] = TYPE_NAME_IDENTIFIER;');
+const buildTypesFreeze = template('Object.freeze(BUNDLE_MODULE_NAME.types);');
 const buildExport = template('export default Object.freeze(BUNDLE_MODULE_NAME);', {sourceType: 'module'});
 
 export default function bundleTemplate(types, bundleModuleName) {
@@ -28,12 +29,14 @@ export default function bundleTemplate(types, bundleModuleName) {
   const imports = typeConfigs.map((typeConfig) => buildImport(typeConfig));
   const declaration = buildDeclaration({BUNDLE_MODULE_NAME});
   const assignments = typeConfigs.map((typeConfig) => buildModuleAssignment(typeConfig));
+  const typesFreeze = buildTypesFreeze({BUNDLE_MODULE_NAME});
   const moduleExport = buildExport({BUNDLE_MODULE_NAME});
 
   return parse(`
     ${imports.map((ast) => generate(ast).code).join('\n')}
     ${generate(declaration).code}
     ${assignments.map((ast) => generate(ast).code).join('\n')}
+    ${generate(typesFreeze).code}
     ${generate(moduleExport).code}
   `, {sourceType: 'module'});
 }
