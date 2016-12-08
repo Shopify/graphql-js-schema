@@ -7,5 +7,8 @@ const Types = {
 Types.types["Product"] = Product;
 Types.types["Shop"] = Shop;
 Types.types["Collection"] = Collection;
+Types.queryType = "Shop";
+Types.mutationType = null;
+Types.subscriptionType = null;
 Object.freeze(Types.types);
 export default Object.freeze(Types);
