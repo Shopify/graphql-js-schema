@@ -27,9 +27,9 @@ function mapTypesToFiles(simplifiedTypes) {
   });
 }
 
-function injectBundle(bundleName) {
+function injectBundle({queryType, mutationType, subscriptionType}, bundleName) {
   return function(typeFileMaps) {
-    const bundleAst = bundleTemplate(typeFileMaps, bundleName.replace(' ', ''));
+    const bundleAst = bundleTemplate({queryType, mutationType, subscriptionType}, typeFileMaps, bundleName.replace(' ', ''));
     const bundle = generate(bundleAst).code;
 
     typeFileMaps.push({
@@ -51,6 +51,6 @@ export default function generateSchemaModules(schema, bundleName) {
     yieldTypes,
     simplifyTypes,
     mapTypesToFiles,
-    injectBundle(bundleName)
+    injectBundle(schema, bundleName)
   ]);
 }
