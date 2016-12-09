@@ -15,11 +15,11 @@ const buildRootLevelAssignment = template('BUNDLE_MODULE_NAME.PROPERTY_NAME = PR
 const buildTypesFreeze = template('Object.freeze(BUNDLE_MODULE_NAME.types);');
 const buildExport = template('export default Object.freeze(BUNDLE_MODULE_NAME);', {sourceType: 'module'});
 
-export default function bundleTemplate({queryType, mutationType, subscriptionType}, types, bundleModuleName) {
+export default function bundleTemplate({queryTypeName, mutationTypeName, subscriptionTypeName}, types, bundleModuleName) {
   const BUNDLE_MODULE_NAME = t.identifier(bundleModuleName);
-  const QUERY_TYPE_NAME = queryType ? t.stringLiteral(queryType) : t.nullLiteral();
-  const MUTATION_TYPE_NAME = mutationType ? t.stringLiteral(mutationType) : t.nullLiteral();
-  const SUBSCRIPTION_TYPE_NAME = subscriptionType ? t.stringLiteral(subscriptionType) : t.nullLiteral();
+  const QUERY_TYPE_NAME = queryTypeName ? t.stringLiteral(queryTypeName) : t.nullLiteral();
+  const MUTATION_TYPE_NAME = mutationTypeName ? t.stringLiteral(mutationTypeName) : t.nullLiteral();
+  const SUBSCRIPTION_TYPE_NAME = subscriptionTypeName ? t.stringLiteral(subscriptionTypeName) : t.nullLiteral();
 
   const typeConfigs = types.map((type) => {
     return {
