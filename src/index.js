@@ -59,6 +59,6 @@ export default function generateSchemaModules(schema, bundleName) {
     yieldTypes,
     simplifyTypes,
     mapTypesToFiles,
-    injectBundle(extractRootTypeNames(schema), bundleName)
+    injectBundle(extractRootTypeNames(schema.data.__schema), bundleName)
   ]);
 }
