@@ -1,6 +1,6 @@
 {
   "name": "@shopify/graphql-js-schema",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Transforms the JSON representation of a GraphQL schema into a set of ES6 type modules.",
   "main": "lib/index.js",
   "bin": "lib/cli.js",
