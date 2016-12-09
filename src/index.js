@@ -27,9 +27,9 @@ function mapTypesToFiles(simplifiedTypes) {
   });
 }
 
-function injectBundle({queryType, mutationType, subscriptionType}, bundleName) {
+function injectBundle(rootTypeNames, bundleName) {
   return function(typeFileMaps) {
-    const bundleAst = bundleTemplate({queryType, mutationType, subscriptionType}, typeFileMaps, bundleName.replace(' ', ''));
+    const bundleAst = bundleTemplate(rootTypeNames, typeFileMaps, bundleName.replace(' ', ''));
     const bundle = generate(bundleAst).code;
 
     typeFileMaps.push({
@@ -39,6 +39,14 @@ function injectBundle({queryType, mutationType, subscriptionType}, bundleName) {
 
     return typeFileMaps;
   };
+}
+
+function extractRootTypeNames({queryType, mutationType, subscriptionType}) {
+  return ({
+    queryTypeName: (queryType ? queryType.name : null),
+    mutationTypeName: (mutationType ? mutationType.name : null),
+    subscriptionTypeName: (subscriptionType ? subscriptionType.name : null)
+  });
 }
 
 
@@ -51,6 +59,6 @@ export default function generateSchemaModules(schema, bundleName) {
     yieldTypes,
     simplifyTypes,
     mapTypesToFiles,
-    injectBundle(schema, bundleName)
+    injectBundle(extractRootTypeNames(schema), bundleName)
   ]);
 }

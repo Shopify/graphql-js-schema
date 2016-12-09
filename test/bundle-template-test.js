@@ -7,7 +7,7 @@ import bundleTemplate from '../src/bundle-template';
 suite('This will ensure that bundles can be generated', () => {
   test('it can handle single types', () => {
     const types = [{name: 'SomeType', path: 'path/to/some/type.js'}];
-    const rootTypeNames = {queryType: 'SomeType', mutationType: null, subscriptionType: null};
+    const rootTypeNames = {queryTypeName: 'SomeType', mutationTypeName: null, subscriptionTypeName: null};
     const expected = getFixture('single-resource-bundle.js');
     const output = bundleTemplate(rootTypeNames, types, 'Schema');
 
@@ -22,7 +22,7 @@ suite('This will ensure that bundles can be generated', () => {
     }, {
       name: 'Collection', path: 'types/collection.js'
     }];
-    const rootTypeNames = {queryType: 'Shop', mutationType: null, subscriptionType: null};
+    const rootTypeNames = {queryTypeName: 'Shop', mutationTypeName: null, subscriptionTypeName: null};
     const expected = getFixture('multi-resource-bundle.js');
     const output = bundleTemplate(rootTypeNames, types, 'Types');
 
@@ -31,7 +31,7 @@ suite('This will ensure that bundles can be generated', () => {
 
   test('it doesn\'t explode when passed no types', () => {
     const types = [];
-    const rootTypeNames = {queryType: null, mutationType: null, subscriptionType: null};
+    const rootTypeNames = {queryTypeName: null, mutationTypeName: null, subscriptionTypeName: null};
     const expected = getFixture('zero-resource-bundle.js');
     const output = bundleTemplate(rootTypeNames, types, 'Bundle');
 
