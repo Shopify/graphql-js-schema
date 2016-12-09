@@ -6,7 +6,7 @@ import typeTemplate from './type-template';
 import bundleTemplate from './bundle-template';
 
 function yieldTypes(schema) {
-  return schema.data.__schema.types;
+  return schema.types;
 }
 
 function simplifyTypes(types) {
@@ -54,7 +54,9 @@ function flow(arg, functions) {
   return functions.reduce(((acc, fn) => fn(acc)), arg);
 }
 
-export default function generateSchemaModules(schema, bundleName) {
+export default function generateSchemaModules(introspectionResponse, bundleName) {
+  const schema = introspectionResponse.data.__schema;
+
   return flow(schema, [
     yieldTypes,
     simplifyTypes,

@@ -9,7 +9,7 @@ import dasherize from 'lodash.kebabcase';
 
 import parseArgs from './parse-args';
 import help from './help';
-import graphqlJsSchema from './index';
+import generateSchemaModules from './index';
 
 function logFileWrite(filePath) {
   console.log(`wroteFile: ${filePath}`);
@@ -68,8 +68,8 @@ function runCli() {
     process.exit(0);
   }
 
-  const schema = JSON.parse(fs.readFileSync(args.schemaFile));
-  const files = graphqlJsSchema(schema, args.schemaBundleName);
+  const introspectionResponse = JSON.parse(fs.readFileSync(args.schemaFile));
+  const files = generateSchemaModules(introspectionResponse, args.schemaBundleName);
 
   if (args.bundleOnly) {
     return rollupAndWriteBundle(args.schemaBundleName, args.outdir, files);
