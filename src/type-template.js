@@ -8,7 +8,8 @@ function buildDeclaration(replacements) {
 
   return template(`const TYPE_NAME_IDENTIFIER = ${JSON.stringify(object, null, 2)};`)(replacements);
 }
-const buildFreezeStatement = template('Object.freeze(TYPE_NAME_IDENTIFIER.fieldBaseTypes);');
+const buildFieldBaseTypesFreezeStatement = template('Object.freeze(TYPE_NAME_IDENTIFIER.fieldBaseTypes);');
+const buildPossibleTypesFreezeStatement = template('Object.freeze(TYPE_NAME_IDENTIFIER.possibleTypes);');
 const buildExport = template('export default Object.freeze(TYPE_NAME_IDENTIFIER);', {sourceType: 'module'});
 
 export default function typeTemplate(type) {
@@ -18,12 +19,14 @@ export default function typeTemplate(type) {
   };
 
   const declaration = buildDeclaration(replacements);
-  const freezeStatement = buildFreezeStatement(replacements);
+  const fieldBaseTypesFreezeStatement = buildFieldBaseTypesFreezeStatement(replacements);
+  const possibleTypesFreezeStatement = buildPossibleTypesFreezeStatement(replacements);
   const moduleExport = buildExport(replacements);
 
   return parse(`
       ${generate(declaration).code}
-      ${generate(freezeStatement).code}
+      ${generate(fieldBaseTypesFreezeStatement).code}
+      ${generate(possibleTypesFreezeStatement).code}
       ${generate(moduleExport).code}
   `, {sourceType: 'module'});
 }
