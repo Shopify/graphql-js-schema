@@ -35,7 +35,7 @@
     "mocha": "3.0.2"
   },
   "scripts": {
-    "test": "npm run lint && npm run mocha",
+    "test": "yarn lint && yarn mocha",
     "mocha": "mocha --compilers js:babel-register -u tdd $([ -n \"${CI}\" ] && echo --reporter xunit --reporter-options output=$CIRCLE_TEST_REPORTS/junit/mocha.xml) test/*",
     "prepublish": "babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 -c .eslintrc.json $([ -n \"${CI}\" ] && echo -o $CIRCLE_TEST_REPORTS/junit/eslint.xml -f junit) src/ test/"
