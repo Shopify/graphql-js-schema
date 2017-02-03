@@ -19,5 +19,4 @@ const Product = {
   "implementsNode": true
 };
 Object.freeze(Product.fieldBaseTypes);
-Object.freeze(Product.possibleTypes);
 export default Object.freeze(Product);

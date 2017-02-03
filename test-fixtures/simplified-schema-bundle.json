@@ -1,7 +1,7 @@
 [
   {
     "name": "QueryRoot",
-    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"collection\": \"Collection\",\n    \"node\": \"Node\",\n    \"product\": \"Product\",\n    \"shop\": \"Shop\"\n  },\n  \"implementsNode\": false\n};\nObject.freeze(QueryRoot.fieldBaseTypes);\nObject.freeze(QueryRoot.possibleTypes);\nexport default Object.freeze(QueryRoot);",
+    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"collection\": \"Collection\",\n    \"node\": \"Node\",\n    \"product\": \"Product\",\n    \"shop\": \"Shop\"\n  },\n  \"implementsNode\": false\n};\nObject.freeze(QueryRoot.fieldBaseTypes);\nexport default Object.freeze(QueryRoot);",
     "path": "types/query-root.js"
   },
   {
@@ -10,7 +10,12 @@
     "path": "types/node.js"
   },
   {
-    "body": "\nimport QueryRoot from \"./types/query-root\";\nimport Node from \"./types/node\";\nconst Schema = {\n  types: {}\n};\nSchema.types[\"QueryRoot\"] = QueryRoot;\nSchema.types[\"Node\"] = Node;\nSchema.queryType = \"QueryRoot\";\nSchema.mutationType = null;\nSchema.subscriptionType = null;\nObject.freeze(Schema.types);\nexport default Object.freeze(Schema);",
+    "name": "Mutation",
+    "body": "\nconst Mutation = {\n  \"name\": \"Mutation\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"apiCustomerAccessTokenCreate\": \"ApiCustomerAccessTokenCreatePayload\",\n    \"apiCustomerAccessTokenDelete\": \"ApiCustomerAccessTokenDeletePayload\",\n    \"apiCustomerAccessTokenRenew\": \"ApiCustomerAccessTokenRenewPayload\"\n  },\n  \"implementsNode\": false,\n  \"relayInputObjectBaseTypes\": {\n    \"apiCustomerAccessTokenCreate\": \"ApiCustomerAccessTokenCreateInput\",\n    \"apiCustomerAccessTokenDelete\": \"ApiCustomerAccessTokenDeleteInput\",\n    \"apiCustomerAccessTokenRenew\": \"ApiCustomerAccessTokenRenewInput\"\n  }\n};\nObject.freeze(Mutation.fieldBaseTypes);\nObject.freeze(Mutation.relayInputObjectBaseTypes);\nexport default Object.freeze(Mutation);",
+    "path": "types/mutation.js"
+  },
+  {
+    "body": "\nimport QueryRoot from \"./types/query-root\";\nimport Node from \"./types/node\";\nimport Mutation from \"./types/mutation\";\nconst Schema = {\n  types: {}\n};\nSchema.types[\"QueryRoot\"] = QueryRoot;\nSchema.types[\"Node\"] = Node;\nSchema.types[\"Mutation\"] = Mutation;\nSchema.queryType = \"QueryRoot\";\nSchema.mutationType = \"Mutation\";\nSchema.subscriptionType = null;\nObject.freeze(Schema.types);\nexport default Object.freeze(Schema);",
     "path": "schema.js"
   }
 ]

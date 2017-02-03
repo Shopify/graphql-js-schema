@@ -5,7 +5,7 @@ import getFixture from './get-fixture';
 import typeTemplate from '../src/type-template';
 
 suite('This will ensure that types can be generated and exported as standalone modules', () => {
-  test('it exports types', () => {
+  test('it exports OBJECT types', () => {
     const type = {
       name: 'Product',
       kind: 'OBJECT',
@@ -27,7 +27,66 @@ suite('This will ensure that types can be generated and exported as standalone m
       implementsNode: true
     };
 
-    const expected = getFixture('type-template-output.js');
+    const expected = getFixture('object-type-template-output.js');
+
+    const output = typeTemplate(type);
+
+    assert.equal(generate(output).code.trim(), expected.trim());
+  });
+
+  test('it exports OBJECT types of name Mutation', () => {
+    const type = {
+      name: 'Mutation',
+      kind: 'OBJECT',
+      fieldBaseTypes: {
+        apiCustomerAccessTokenCreate: 'ApiCustomerAccessTokenCreatePayload',
+        apiCustomerAccessTokenDelete: 'ApiCustomerAccessTokenDeletePayload',
+        apiCustomerAccessTokenRenew: 'ApiCustomerAccessTokenRenewPayload'
+      },
+      implementsNode: false,
+      relayInputObjectBaseTypes: {
+        apiCustomerAccessTokenCreate: 'ApiCustomerAccessTokenCreateInput',
+        apiCustomerAccessTokenDelete: 'ApiCustomerAccessTokenDeleteInput',
+        apiCustomerAccessTokenRenew: 'ApiCustomerAccessTokenRenewInput'
+      }
+    };
+
+    const expected = getFixture('mutation-object-type-template-output.js');
+
+    const output = typeTemplate(type);
+
+    assert.equal(generate(output).code.trim(), expected.trim());
+  });
+
+  test('it exports INPUT_OBJECT types', () => {
+    const type = {
+      name: 'ApiCustomerAccessTokenCreateInput',
+      kind: 'INPUT_OBJECT',
+      inputFieldBaseTypes: {
+        clientMutationId: 'String',
+        email: 'String',
+        password: 'String'
+      }
+    };
+
+    const expected = getFixture('input-object-type-template-output.js');
+
+    const output = typeTemplate(type);
+
+    assert.equal(generate(output).code.trim(), expected.trim());
+  });
+
+  test('it exports INTERFACE types', () => {
+    const type = {
+      name: 'Node',
+      kind: 'INTERFACE',
+      fieldBaseTypes: {
+        id: 'ID'
+      },
+      possibleTypes: ['ApiCustomerAccessToken', 'Collection', 'CreditCardPaymentRequest', 'Order', 'Product', 'ProductOption', 'ProductVariant', 'PurchaseSession', 'ShippingRatesRequest', 'ShopPolicy']
+    };
+
+    const expected = getFixture('interface-type-template-output.js');
 
     const output = typeTemplate(type);
 
