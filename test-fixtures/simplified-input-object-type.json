@@ -1,0 +1,11 @@
+{
+  "name": "InputThing",
+  "kind": "INPUT_OBJECT",
+  "fieldBaseTypes": {
+    "string": "String",
+    "stringNonNull": "String!",
+    "list": "[String]",
+    "listNonNull": "[String!]",
+    "list2D": "[[String]]"
+  }
+}
