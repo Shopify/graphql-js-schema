@@ -1,0 +1,15 @@
+{
+  "name": "Mutation",
+  "kind": "OBJECT",
+  "fieldBaseTypes": {
+    "apiCustomerAccessTokenCreate": "ApiCustomerAccessTokenCreatePayload",
+    "apiCustomerAccessTokenDelete": "ApiCustomerAccessTokenDeletePayload",
+    "apiCustomerAccessTokenRenew": "ApiCustomerAccessTokenRenewPayload"
+  },
+  "relayInputObjectBaseTypes": {
+    "apiCustomerAccessTokenCreate": "ApiCustomerAccessTokenCreateInput",
+    "apiCustomerAccessTokenDelete": "ApiCustomerAccessTokenDeleteInput",
+    "apiCustomerAccessTokenRenew": "ApiCustomerAccessTokenRenewInput"
+  },
+  "implementsNode": false
+}
