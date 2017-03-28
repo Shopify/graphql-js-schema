@@ -14,8 +14,16 @@ Transforms the JSON representation of a GraphQL schema into a set of ES6 type mo
 
 ## Installation
 
+#### With Yarn:
+
 ```bash
-$ npm install @shopify/graphql-js-schema
+$ yarn global add graphql-js-schema
+```
+
+#### With NPM:
+
+```bash
+$ npm install -g graphql-js-schema
 ```
 
 ## Examples
@@ -57,30 +65,23 @@ import Schema from 'schema/schema';
 
 Schema.Product.name // => Product
 Schema.Product.implementsNode // => true
+Schema.Product.kind // => OBJECT
 
-// Types are separated into scalars, objects and connections.
+// All type strings returned through `fieldBaseTypes` are available in the
+// schema for further exploration.
 
-// Scalars:
-Schema.Product.scalars
-Schema.Product.scalars.handle
-Schema.Product.scalars.handle.type // => String
-Schema.Product.scalars.handle.kind // => SCALAR
-Schema.Product.scalars.handle.isList // => false
-Schema.Product.scalars.handle.args // => []
-
-// Objects
-Schema.Product.objects.images
-Schema.Product.objects.images.type // => Image
-Schema.Product.objects.images.kind // => OBJECT
-Schema.Product.objects.images.isList // => true
-Schema.Product.objects.images.args // => ["first", "maxWidth", "maxHeight", "crop", "scale"]
-
-// Connections
-Schema.Product.connections.collections
-Schema.Product.connections.collections.type // => CollectionConnection
-Schema.Product.connections.collections.kind // => OBJECT
-Schema.Product.connections.collections.isList // => false
-Schema.Product.connections.collections.args // => ["first", "after", "reverse"]
+Schema.Product.fieldBaseTypes.id // => ID
+Schema.Product.fieldBaseTypes.handle // => String
+Schema.Product.fieldBaseTypes.images // => Image
+Schema.Product.fieldBaseTypes.options // => ProductOption
+Schema.Product.fieldBaseTypes.productType // => String
+Schema.Product.fieldBaseTypes.publishedAt // => DateTime
+Schema.Product.fieldBaseTypes.tags // => String
+Schema.Product.fieldBaseTypes.vendor // => String
+Schema.Product.fieldBaseTypes.collections // => CollectionConnection
+Schema.Product.fieldBaseTypes.variants // => ProductVariantConnection
+Schema.Product.fieldBaseTypes.createdAt // => DateTime
+Schema.Product.fieldBaseTypes.updatedAt // => DateTime
 
 ```
 
