@@ -32,12 +32,12 @@ To transform a GraphQL schema file (as json) into a set of ES6 consumable
 modules, run the following command.
 
 ```bash
-graphql-js-schema --schema-file ./schema.json --outdir schema --schema-bundle-name="Schema"
+graphql-js-schema --schema-file ./schema.json --outdir schema --schema-bundle-name="Types"
 ```
 
 This will create a directory called schema, and a root module called `Schema` in
-the file `schema/schema.js`. It wall also collect all the non-scalar types in
-`schema/types`, and export them. The top level bundle exists for convenience,
+the file `schema/types.js`. It wall also collect all the non-scalar types in
+`schema/types/`, and export them. The top level bundle exists for convenience,
 but you can consume these modules however you like.
 
 ## API
