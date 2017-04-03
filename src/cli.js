@@ -69,7 +69,7 @@ function runCli() {
   }
 
   const introspectionResponse = JSON.parse(fs.readFileSync(args.schemaFile));
-  const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, args.whitelist);
+  const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, args.whitelistTypes);
 
   if (args.bundleOnly) {
     return rollupAndWriteBundle(args.schemaBundleName, args.outdir, files);
