@@ -9,8 +9,22 @@ function yieldTypes(schema) {
   return schema.types;
 }
 
-function simplifyTypes(types) {
-  return types.map((type) => simplifyType(type));
+function filterTypes(whiteList) {
+  return function(types) {
+    if (!whiteList) {
+      return types;
+    }
+
+    return types.filter((simplifiedType) => {
+      return whiteList.includes(simplifiedType.name);
+    });
+  };
+}
+
+function simplifyTypes(whiteList) {
+  return function(types) {
+    return types.map((type) => simplifyType(type, whiteList));
+  };
 }
 
 function filenameForType(type) {
@@ -54,12 +68,13 @@ function flow(arg, functions) {
   return functions.reduce(((acc, fn) => fn(acc)), arg);
 }
 
-export default function generateSchemaModules(introspectionResponse, bundleName) {
+export default function generateSchemaModules(introspectionResponse, bundleName, whiteList) {
   const schema = introspectionResponse.data.__schema;
 
   return flow(schema, [
     yieldTypes,
-    simplifyTypes,
+    filterTypes(whiteList),
+    simplifyTypes(whiteList),
     mapTypesToFiles,
     injectBundle(extractRootTypeNames(schema), bundleName)
   ]);
