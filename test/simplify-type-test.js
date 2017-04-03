@@ -41,10 +41,10 @@ suite('simplify-type-test', () => {
 
   test('it simplifies types of kind OBJECT', () => {
     const schemaObjectType = JSON.parse(getFixture('schema-object-type.json'));
-    const simplifiedObject = JSON.parse(getFixture('simplified-object-type-with-white-list.json'));
+    const simplifiedObject = JSON.parse(getFixture('simplified-object-type-with-whitelist.json'));
 
-    const whiteList = ['CollectionConnection', 'String', 'ID'];
+    const whitelist = ['CollectionConnection', 'String', 'ID'];
 
-    assert.deepEqual(simplifyType(schemaObjectType, whiteList), simplifiedObject);
+    assert.deepEqual(simplifyType(schemaObjectType, whitelist), simplifiedObject);
   });
 });

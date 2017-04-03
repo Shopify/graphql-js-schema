@@ -37,12 +37,12 @@ suite('parse-args-test', () => {
 
   test('it parses type white lists', () => {
     const opts = parseArgs([
-      '--white-list-type', 'Product',
-      '--white-list-type', 'Collection',
-      '--white-list-type', 'String',
-      '--white-list-type', 'Money'
+      '--whitelist-type', 'Product',
+      '--whitelist-type', 'Collection',
+      '--whitelist-type', 'String',
+      '--whitelist-type', 'Money'
     ].concat(requiredArgs));
 
-    assert.deepEqual(opts.whiteListTypes, ['Product', 'Collection', 'String', 'Money']);
+    assert.deepEqual(opts.whitelistTypes, ['Product', 'Collection', 'String', 'Money']);
   });
 });

@@ -7,7 +7,7 @@ export default function parseArgs(rawArgs) {
       'schema-file',
       'outdir',
       'schema-bundle-name',
-      'white-list-type'
+      'whitelist-type'
     ],
     default: {
       'schema-bundle-name': 'Schema',
@@ -24,6 +24,6 @@ export default function parseArgs(rawArgs) {
     outdir: args.outdir,
     schemaBundleName: args['schema-bundle-name'],
     bundleOnly: args['bundle-only'],
-    whiteListTypes: args['white-list-type'] || false
+    whitelistTypes: args['whitelist-type'] || false
   };
 }
