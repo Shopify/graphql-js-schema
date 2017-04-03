@@ -6,7 +6,8 @@ export default function parseArgs(rawArgs) {
     string: [
       'schema-file',
       'outdir',
-      'schema-bundle-name'
+      'schema-bundle-name',
+      'whitelist-type'
     ],
     default: {
       'schema-bundle-name': 'Schema',
@@ -14,7 +15,7 @@ export default function parseArgs(rawArgs) {
     }
   });
 
-  if (args.help || !(args['schema-file'] || args.outdir)) {
+  if (args.help || !(args['schema-file'] && args.outdir)) {
     return {showHelp: true};
   }
 
@@ -22,6 +23,7 @@ export default function parseArgs(rawArgs) {
     schemaFile: args['schema-file'],
     outdir: args.outdir,
     schemaBundleName: args['schema-bundle-name'],
-    bundleOnly: args['bundle-only']
+    bundleOnly: args['bundle-only'],
+    whitelistTypes: args['whitelist-type'] || false
   };
 }

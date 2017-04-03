@@ -44,15 +44,31 @@ function possibleTypes(interfaceType) {
   return interfaceType.possibleTypes.map((t) => t.name);
 }
 
-export default function simplifyType(type) {
+export default function simplifyType(type, whitelist = false) {
   const simplifiedType = {
     name: type.name,
     kind: type.kind
   };
 
+  function filterTypes(baseTypes) {
+    if (!whitelist) {
+      return baseTypes;
+    }
+
+    return Object.keys(baseTypes).reduce((acc, field) => {
+      const baseType = baseTypes[field];
+
+      if (whitelist.includes(baseType)) {
+        acc[field] = baseType;
+      }
+
+      return acc;
+    }, {});
+  }
+
   switch (type.kind) {
     case 'OBJECT':
-      simplifiedType.fieldBaseTypes = fieldBaseTypes(type.fields);
+      simplifiedType.fieldBaseTypes = filterTypes(fieldBaseTypes(type.fields));
       simplifiedType.implementsNode = implementsNode(type);
 
       if (type.name === 'Mutation') {
@@ -61,12 +77,12 @@ export default function simplifyType(type) {
 
       return simplifiedType;
     case 'INTERFACE':
-      simplifiedType.fieldBaseTypes = fieldBaseTypes(type.fields);
+      simplifiedType.fieldBaseTypes = filterTypes(fieldBaseTypes(type.fields));
       simplifiedType.possibleTypes = possibleTypes(type);
 
       return simplifiedType;
     case 'INPUT_OBJECT':
-      simplifiedType.inputFieldBaseTypes = fieldBaseTypes(type.inputFields);
+      simplifiedType.inputFieldBaseTypes = filterTypes(fieldBaseTypes(type.inputFields));
 
       return simplifiedType;
     default:

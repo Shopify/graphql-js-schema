@@ -1,0 +1,14 @@
+{
+  "name": "Product",
+  "kind": "OBJECT",
+  "fieldBaseTypes": {
+    "collections": "CollectionConnection",
+    "handle": "String",
+    "id": "ID",
+    "productType": "String",
+    "tags": "String",
+    "title": "String",
+    "vendor": "String"
+  },
+  "implementsNode": true
+}
