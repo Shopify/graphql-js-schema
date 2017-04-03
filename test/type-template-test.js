@@ -4,7 +4,7 @@ import getFixture from './get-fixture';
 
 import typeTemplate from '../src/type-template';
 
-suite('This will ensure that types can be generated and exported as standalone modules', () => {
+suite('type-template-test', () => {
   test('it exports OBJECT types', () => {
     const type = {
       name: 'Product',

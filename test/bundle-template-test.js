@@ -4,7 +4,7 @@ import getFixture from './get-fixture';
 
 import bundleTemplate from '../src/bundle-template';
 
-suite('This will ensure that bundles can be generated', () => {
+suite('bundle-template-test', () => {
   test('it can handle single types', () => {
     const types = [{name: 'SomeType', path: 'path/to/some/type.js'}];
     const rootTypeNames = {queryTypeName: 'SomeType', mutationTypeName: null, subscriptionTypeName: null};
