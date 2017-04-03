@@ -3,7 +3,7 @@ import getFixture from './get-fixture';
 
 import simplifyType from '../src/simplify-type';
 
-suite('This will ensure that we\'re destructuring types from the schema into types we export as modules', () => {
+suite('simplify-type-test', () => {
   test('it simplifies types of kind OBJECT', () => {
     const schemaObjectType = JSON.parse(getFixture('schema-object-type.json'));
     const simplifiedObject = JSON.parse(getFixture('simplified-object-type.json'));
