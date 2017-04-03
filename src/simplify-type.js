@@ -16,9 +16,25 @@ function getBaseTypeKind(type) {
   }
 }
 
-function fieldBaseTypes(fields) {
+function fieldBaseTypes(fields, whiteList) {
+  let assign;
+
+  if (whiteList) {
+    assign = function(acc, field) {
+      const baseTypeName = getBaseTypeName(field.type);
+
+      if (whiteList.includes(baseTypeName)) {
+        acc[field.name] = baseTypeName;
+      }
+    };
+  } else {
+    assign = function(acc, field) {
+      acc[field.name] = getBaseTypeName(field.type);
+    };
+  }
+
   return fields.reduce((acc, field) => {
-    acc[field.name] = getBaseTypeName(field.type);
+    assign(acc, field);
 
     return acc;
   }, {});
@@ -44,7 +60,7 @@ function possibleTypes(interfaceType) {
   return interfaceType.possibleTypes.map((t) => t.name);
 }
 
-export default function simplifyType(type) {
+export default function simplifyType(type, whiteList = false) {
   const simplifiedType = {
     name: type.name,
     kind: type.kind
@@ -52,7 +68,7 @@ export default function simplifyType(type) {
 
   switch (type.kind) {
     case 'OBJECT':
-      simplifiedType.fieldBaseTypes = fieldBaseTypes(type.fields);
+      simplifiedType.fieldBaseTypes = fieldBaseTypes(type.fields, whiteList);
       simplifiedType.implementsNode = implementsNode(type);
 
       if (type.name === 'Mutation') {

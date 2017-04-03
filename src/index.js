@@ -10,7 +10,7 @@ function yieldTypes(schema) {
 }
 
 function simplifyTypes(types) {
-  return types.map(simplifyType);
+  return types.map((type) => simplifyType(type));
 }
 
 function filenameForType(type) {
