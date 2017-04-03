@@ -1,5 +1,4 @@
 import assert from 'assert';
-
 import parseArgs from '../src/parse-args';
 
 suite('parse-args-test', () => {
