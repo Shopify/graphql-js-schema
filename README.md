@@ -36,7 +36,7 @@ graphql-js-schema --schema-file ./schema.json --outdir schema --schema-bundle-na
 ```
 
 This will create a directory called schema, and a root module called `Schema` in
-the file `schema/types.js`. It wall also collect all the non-scalar types in
+the file `schema/types.js`. It will also collect all the non-scalar types in
 `schema/types/`, and export them. The top level bundle exists for convenience,
 but you can consume these modules however you like.
 
