@@ -1,11 +1,11 @@
 [
   {
     "name": "QueryRoot",
-    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"product\": \"Product\",\n    \"shop\": \"Shop\"\n  },\n  \"implementsNode\": false\n};\nObject.freeze(QueryRoot.fieldBaseTypes);\nexport default Object.freeze(QueryRoot);",
+    "body": "\nconst QueryRoot = {\n  \"name\": \"QueryRoot\",\n  \"kind\": \"OBJECT\",\n  \"fieldBaseTypes\": {\n    \"product\": \"Product\",\n    \"shop\": \"Shop\"\n  },\n  \"implementsNode\": false\n};\nexport default QueryRoot;",
     "path": "types/query-root.js"
   },
   {
-    "body": "\nimport QueryRoot from \"./types/query-root\";\nconst Schema = {\n  types: {}\n};\nSchema.types[\"QueryRoot\"] = QueryRoot;\nSchema.queryType = \"QueryRoot\";\nSchema.mutationType = \"Mutation\";\nSchema.subscriptionType = null;\nObject.freeze(Schema.types);\nexport default Object.freeze(Schema);",
+    "body": "\nimport QueryRoot from \"./types/query-root\";\nconst Schema = {\n  types: {}\n};\nSchema.types[\"QueryRoot\"] = QueryRoot;\nSchema.queryType = \"QueryRoot\";\nSchema.mutationType = \"Mutation\";\nSchema.subscriptionType = null;\n\nfunction recursivelyFreezeObject(structure) {\n  Object.getOwnPropertyNames(structure).forEach(key => {\n    const value = structure[key];\n    if (value && typeof value === 'object') {\n      recursivelyFreezeObject(value);\n    }\n  });\n  Object.freeze(structure);\n  return structure;\n}\n\nexport default recursivelyFreezeObject(Schema);",
     "path": "schema.js"
   }
 ]

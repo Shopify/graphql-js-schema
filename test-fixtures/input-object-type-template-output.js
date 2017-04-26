@@ -7,5 +7,4 @@ const ApiCustomerAccessTokenCreateInput = {
     "password": "String"
   }
 };
-Object.freeze(ApiCustomerAccessTokenCreateInput.inputFieldBaseTypes);
-export default Object.freeze(ApiCustomerAccessTokenCreateInput);
+export default ApiCustomerAccessTokenCreateInput;

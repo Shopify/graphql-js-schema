@@ -12,8 +12,7 @@ function buildImport(replacements) {
 const buildDeclaration = template('const BUNDLE_MODULE_NAME = {types: {}};');
 const buildModuleAssignment = template('BUNDLE_MODULE_NAME.types[TYPE_NAME] = TYPE_NAME_IDENTIFIER;');
 const buildRootLevelAssignment = template('BUNDLE_MODULE_NAME.PROPERTY_NAME = PROPERTY_VALUE;');
-const buildTypesFreeze = template('Object.freeze(BUNDLE_MODULE_NAME.types);');
-const buildExport = template('export default Object.freeze(BUNDLE_MODULE_NAME);', {sourceType: 'module'});
+const buildExport = template('export default recursivelyFreezeObject(BUNDLE_MODULE_NAME);', {sourceType: 'module'});
 
 export default function bundleTemplate({queryTypeName, mutationTypeName, subscriptionTypeName}, types, bundleModuleName) {
   const BUNDLE_MODULE_NAME = t.identifier(bundleModuleName);
@@ -36,7 +35,6 @@ export default function bundleTemplate({queryTypeName, mutationTypeName, subscri
   const queryTypeAssignment = buildRootLevelAssignment({BUNDLE_MODULE_NAME, PROPERTY_NAME: t.identifier('queryType'), PROPERTY_VALUE: QUERY_TYPE_NAME});
   const mutationTypeAssignment = buildRootLevelAssignment({BUNDLE_MODULE_NAME, PROPERTY_NAME: t.identifier('mutationType'), PROPERTY_VALUE: MUTATION_TYPE_NAME});
   const subscriptionTypeAssignment = buildRootLevelAssignment({BUNDLE_MODULE_NAME, PROPERTY_NAME: t.identifier('subscriptionType'), PROPERTY_VALUE: SUBSCRIPTION_TYPE_NAME});
-  const typesFreeze = buildTypesFreeze({BUNDLE_MODULE_NAME});
   const moduleExport = buildExport({BUNDLE_MODULE_NAME});
 
   return parse(`
@@ -46,7 +44,18 @@ export default function bundleTemplate({queryTypeName, mutationTypeName, subscri
     ${generate(queryTypeAssignment).code}
     ${generate(mutationTypeAssignment).code}
     ${generate(subscriptionTypeAssignment).code}
-    ${generate(typesFreeze).code}
+
+    function recursivelyFreezeObject(structure) {
+      Object.getOwnPropertyNames(structure).forEach((key) => {
+        const value = structure[key];
+        if (value && typeof value === 'object') {
+          recursivelyFreezeObject(value);
+        }
+      });
+      Object.freeze(structure);
+      return structure;
+    }
+
     ${generate(moduleExport).code}
   `, {sourceType: 'module'});
 }
