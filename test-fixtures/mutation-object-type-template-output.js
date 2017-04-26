@@ -13,6 +13,4 @@ const Mutation = {
     "apiCustomerAccessTokenRenew": "ApiCustomerAccessTokenRenewInput"
   }
 };
-Object.freeze(Mutation.fieldBaseTypes);
-Object.freeze(Mutation.relayInputObjectBaseTypes);
-export default Object.freeze(Mutation);
+export default Mutation;

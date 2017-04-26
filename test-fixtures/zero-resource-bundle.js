@@ -5,5 +5,16 @@ const Bundle = {
 Bundle.queryType = null;
 Bundle.mutationType = null;
 Bundle.subscriptionType = null;
-Object.freeze(Bundle.types);
-export default Object.freeze(Bundle);
+
+function recursivelyFreezeObject(structure) {
+  Object.getOwnPropertyNames(structure).forEach(key => {
+    const value = structure[key];
+    if (value && typeof value === 'object') {
+      recursivelyFreezeObject(value);
+    }
+  });
+  Object.freeze(structure);
+  return structure;
+}
+
+export default recursivelyFreezeObject(Bundle);

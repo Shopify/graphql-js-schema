@@ -10,5 +10,16 @@ Types.types["Collection"] = Collection;
 Types.queryType = "Shop";
 Types.mutationType = null;
 Types.subscriptionType = null;
-Object.freeze(Types.types);
-export default Object.freeze(Types);
+
+function recursivelyFreezeObject(structure) {
+  Object.getOwnPropertyNames(structure).forEach(key => {
+    const value = structure[key];
+    if (value && typeof value === 'object') {
+      recursivelyFreezeObject(value);
+    }
+  });
+  Object.freeze(structure);
+  return structure;
+}
+
+export default recursivelyFreezeObject(Types);
