@@ -44,4 +44,21 @@ suite('parse-args-test', () => {
 
     assert.deepEqual(opts.whitelistTypes, ['Product', 'Collection', 'String', 'Money']);
   });
+
+  test('it parses a whitelist config json file', () => {
+    const opts = parseArgs([
+      '--whitelist-config', 'profile.json'
+    ].concat(requiredArgs));
+
+    assert.equal(opts.whitelistConfig, 'profile.json');
+  });
+
+  test('it shows help if you try to supply a whitelist type and a whitelist config', () => {
+    const opts = parseArgs([
+      '--whitelist-type', 'Product',
+      '--whitelist-config', 'profile.json'
+    ].concat(requiredArgs));
+
+    assert.equal(opts.showHelp, true);
+  });
 });
