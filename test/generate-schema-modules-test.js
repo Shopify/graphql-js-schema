@@ -12,19 +12,19 @@ suite('generate-schema-modules-test', () => {
     assert.deepEqual(modules, expected);
   });
 
-  test('it can convert a schema into a set of files and bundle object', () => {
+  test('it can convert a schema into a set of files and bundle object with a whitelist', () => {
     const introspectionResponse = JSON.parse(getFixture('schema.json'));
     const expected = JSON.parse(getFixture('simplified-schema-bundle-with-whitelist.json'));
-    const modules = generateSchemaModules(introspectionResponse, 'Schema', [
-      'QueryRoot',
-      'Shop',
-      'ProductConnection',
-      'ProductEdge',
-      'Product',
-      'String',
-      'ID',
-      'DateTime'
-    ]);
+    const modules = generateSchemaModules(introspectionResponse, 'Schema', {
+      QueryRoot: [
+        'shop',
+        'product',
+        'node'
+      ],
+      Node: [
+        'id'
+      ]
+    });
 
     assert.deepEqual(modules, expected);
   });
