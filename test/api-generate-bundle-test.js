@@ -8,9 +8,9 @@ suite('api-generate-bundle-test', () => {
     const introspectionResponse = JSON.parse(getFixture('schema.json'));
     const expected = getFixture('schema-type-bundle.js');
 
-    return generateSchemaBundle(introspectionResponse, 'Types').then(({filename, bundleCode}) => {
-      assert.equal(filename, 'types.js');
-      assert.equal(bundleCode, expected);
+    return generateSchemaBundle(introspectionResponse, 'Types').then(({path, body}) => {
+      assert.equal(path, 'types.js');
+      assert.equal(body, expected);
     });
   });
 });

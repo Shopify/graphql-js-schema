@@ -6,8 +6,8 @@ import mkdirp from 'mkdirp';
 
 import parseArgs from './parse-args';
 import help from './help';
-import {writeFiles, rollupAndWriteBundle} from './writers';
-import generateSchemaModules from './index';
+import {writeFiles, writeFile} from './writers';
+import generateSchemaModules, {generateSchemaBundle} from './index';
 
 function runCli() {
   const args = parseArgs(process.argv.slice(2));
@@ -24,11 +24,16 @@ function runCli() {
   }
 
   const introspectionResponse = JSON.parse(fs.readFileSync(args.schemaFile));
-  const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, whitelistConfig);
 
   if (args.bundleOnly) {
-    return rollupAndWriteBundle(args.schemaBundleName, args.outdir, files);
+    const bundle = generateSchemaBundle(introspectionResponse, args.schemaBundleName, whitelistConfig);
+
+    mkdirp.sync(args.outdir);
+
+    return writeFile(args.outdir, bundle.path, bundle.body);
   } else {
+    const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, whitelistConfig);
+
     mkdirp.sync(path.join(args.outdir, 'types'));
 
     return writeFiles(args.outdir, files);

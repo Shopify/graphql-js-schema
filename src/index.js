@@ -105,8 +105,8 @@ export function generateSchemaBundle(introspectionResponse, bundleName, whitelis
     return bundle.generate({format: 'es'});
   }).then((result) => {
     return {
-      bundleCode: result.code,
-      filename: entryFilename
+      body: result.code,
+      path: entryFilename
     };
   });
 }
