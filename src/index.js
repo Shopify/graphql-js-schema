@@ -15,7 +15,7 @@ function filterTypes(whitelistConfig) {
       return types;
     }
 
-    const whitelistTypes = Object.getOwnPropertyNames(whitelistConfig);
+    const whitelistTypes = Object.keys(whitelistConfig);
 
     return types.filter((simplifiedType) => {
       return whitelistTypes.includes(simplifiedType.name);
