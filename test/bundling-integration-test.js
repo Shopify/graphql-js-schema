@@ -8,13 +8,13 @@ import getFixture from './get-fixture';
 import {rollupAndWriteBundle} from '../src/writers';
 import generateSchemaModules from '../src/index';
 
-function buildCompileAndImportModule() {
+function buildCompileAndImportModule(whitelistConfig = false) {
   tmp.setGracefulCleanup();
 
   const tmpDir = tmp.dirSync().name;
 
   const introspectionResponse = JSON.parse(getFixture('schema.json'));
-  const modules = generateSchemaModules(introspectionResponse, 'Schema');
+  const modules = generateSchemaModules(introspectionResponse, 'Schema', whitelistConfig);
 
   return rollupAndWriteBundle('Schema', tmpDir, modules).then(() => {
     const bundleFileName = path.join(tmpDir, 'schema.js');
@@ -70,6 +70,51 @@ suite('bundling-integration-test', () => {
     return buildCompileAndImportModule().then((bundle) => {
       assertDeeplyFrozen(bundle);
       assert.equal(leafCount, 10, 'it traversed all objects in the tree');
+    }, (error) => {
+      assert.ok(false, `the modules could not be imported:
+        ${error.toString()}`);
+    });
+  });
+
+  test('it can bundle with a whitelist config', () => {
+    return buildCompileAndImportModule({
+      QueryRoot: [
+        'node',
+        'product'
+      ],
+      Node: [
+        'id'
+      ]
+    }).then((bundle) => {
+      assert.deepEqual(bundle, {
+        mutationType: 'Mutation',
+        queryType: 'QueryRoot',
+        subscriptionType: null,
+        types: {
+          QueryRoot: {
+            name: 'QueryRoot',
+            kind: 'OBJECT',
+            fieldBaseTypes: {
+              node: 'Node',
+              product: 'Product'
+            },
+            implementsNode: false
+          },
+          Node: {
+            name: 'Node',
+            kind: 'INTERFACE',
+            fieldBaseTypes: {
+              id: 'ID'
+            },
+            possibleTypes: [
+              'Collection',
+              'Product',
+              'ProductOption',
+              'ProductVariant'
+            ]
+          }
+        }
+      });
     }, (error) => {
       assert.ok(false, `the modules could not be imported:
         ${error.toString()}`);

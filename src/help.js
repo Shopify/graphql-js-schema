@@ -3,6 +3,7 @@ usage: graphql-js-schema --schema-file ./schema.json
                          --outdir graph
                          [--schema-bundle-name "Schema"]
                          [--bundle-only]
+                         [--whitelist-config "profile.json"]
 
 Transform the json representation of a GraphQL Schema into es6 modules
 
@@ -22,4 +23,7 @@ arguments:
                       The default behaviour is to output separate files for each
                       type, and expose a top-level module that can be imported
                       as a single module.
+
+ --whitelist-config   A JSON file with profiled types and/or profiled fields to
+                      add to a whitelist.
 `;

@@ -34,14 +34,11 @@ suite('parse-args-test', () => {
     assert.equal(parseArgs(['--help']).showHelp, true);
   });
 
-  test('it parses type white lists', () => {
+  test('it parses a whitelist config json file', () => {
     const opts = parseArgs([
-      '--whitelist-type', 'Product',
-      '--whitelist-type', 'Collection',
-      '--whitelist-type', 'String',
-      '--whitelist-type', 'Money'
+      '--whitelist-config', 'profile.json'
     ].concat(requiredArgs));
 
-    assert.deepEqual(opts.whitelistTypes, ['Product', 'Collection', 'String', 'Money']);
+    assert.equal(opts.whitelistConfig, 'profile.json');
   });
 });

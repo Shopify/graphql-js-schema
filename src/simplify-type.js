@@ -51,14 +51,16 @@ export default function simplifyType(type, whitelist = false) {
   };
 
   function filterTypes(baseTypes) {
-    if (!whitelist) {
+    const whitelistFields = whitelist && whitelist[simplifiedType.name];
+
+    if (!whitelistFields) {
       return baseTypes;
     }
 
     return Object.keys(baseTypes).reduce((acc, field) => {
       const baseType = baseTypes[field];
 
-      if (whitelist.includes(baseType)) {
+      if (whitelistFields.includes(field)) {
         acc[field] = baseType;
       }
 

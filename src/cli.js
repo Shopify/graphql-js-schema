@@ -17,8 +17,14 @@ function runCli() {
     process.exit(0);
   }
 
+  let whitelistConfig;
+
+  if (args.whitelistConfig) {
+    whitelistConfig = JSON.parse(fs.readFileSync(args.whitelistConfig));
+  }
+
   const introspectionResponse = JSON.parse(fs.readFileSync(args.schemaFile));
-  const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, args.whitelistTypes);
+  const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, whitelistConfig);
 
   if (args.bundleOnly) {
     return rollupAndWriteBundle(args.schemaBundleName, args.outdir, files);

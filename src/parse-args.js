@@ -1,5 +1,9 @@
 import minimist from 'minimist';
 
+function shouldShowHelp(args) {
+  return (args.help || !(args['schema-file'] && args.outdir));
+}
+
 export default function parseArgs(rawArgs) {
   const args = minimist(rawArgs, {
     boolean: 'bundle-only',
@@ -7,7 +11,7 @@ export default function parseArgs(rawArgs) {
       'schema-file',
       'outdir',
       'schema-bundle-name',
-      'whitelist-type'
+      'whitelist-config'
     ],
     default: {
       'schema-bundle-name': 'Schema',
@@ -15,7 +19,7 @@ export default function parseArgs(rawArgs) {
     }
   });
 
-  if (args.help || !(args['schema-file'] && args.outdir)) {
+  if (shouldShowHelp(args)) {
     return {showHelp: true};
   }
 
@@ -24,6 +28,6 @@ export default function parseArgs(rawArgs) {
     outdir: args.outdir,
     schemaBundleName: args['schema-bundle-name'],
     bundleOnly: args['bundle-only'],
-    whitelistTypes: args['whitelist-type'] || false
+    whitelistConfig: args['whitelist-config']
   };
 }
