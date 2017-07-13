@@ -3,10 +3,8 @@ import tmp from 'tmp';
 import path from 'path';
 import {transformFileSync} from 'babel-core';
 import {writeFileSync} from 'fs';
-
 import getFixture from './get-fixture';
-import {rollupAndWriteBundle} from '../src/writers';
-import generateSchemaModules from '../src/index';
+import {generateSchemaBundle} from '../src/index';
 
 function buildCompileAndImportModule(whitelistConfig = false) {
   tmp.setGracefulCleanup();
@@ -14,25 +12,27 @@ function buildCompileAndImportModule(whitelistConfig = false) {
   const tmpDir = tmp.dirSync().name;
 
   const introspectionResponse = JSON.parse(getFixture('schema.json'));
-  const modules = generateSchemaModules(introspectionResponse, 'Schema', whitelistConfig);
 
-  return rollupAndWriteBundle('Schema', tmpDir, modules).then(() => {
-    const bundleFileName = path.join(tmpDir, 'schema.js');
+  return generateSchemaBundle(introspectionResponse, 'Schema', whitelistConfig).then((bundle) => {
+    const bundleFileName = path.join(tmpDir, bundle.path);
     const options = {
       presets: [
         path.join(process.cwd(), 'node_modules/babel-preset-shopify/node')
       ]
     };
-    const body = transformFileSync(bundleFileName, options).code;
+
+    writeFileSync(bundleFileName, bundle.body);
+
+    const cjsBody = transformFileSync(bundleFileName, options).code;
 
     const compiledFilePath = path.join(tmpDir, 'compiled.js');
 
-    writeFileSync(compiledFilePath, body);
+    writeFileSync(compiledFilePath, cjsBody);
 
     try {
-      const bundle = require(compiledFilePath).default;
+      const types = require(compiledFilePath).default;
 
-      return Promise.resolve(bundle);
+      return Promise.resolve(types);
     } catch (error) {
       return Promise.reject(error);
     }
