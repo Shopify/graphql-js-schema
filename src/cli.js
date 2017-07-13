@@ -26,11 +26,12 @@ function runCli() {
   const introspectionResponse = JSON.parse(fs.readFileSync(args.schemaFile));
 
   if (args.bundleOnly) {
-    const bundle = generateSchemaBundle(introspectionResponse, args.schemaBundleName, whitelistConfig);
-
     mkdirp.sync(args.outdir);
 
-    return writeFile(args.outdir, bundle.path, bundle.body);
+    return generateSchemaBundle(introspectionResponse, args.schemaBundleName, whitelistConfig).then((bundle) => {
+      return writeFile(args.outdir, bundle.path, bundle.body);
+    });
+
   } else {
     const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, whitelistConfig);
 
