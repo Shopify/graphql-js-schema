@@ -37,19 +37,18 @@ function filenameForType(type) {
   return path.join('types', `${dasherize(type.name)}.js`);
 }
 
-function mapTypesToFiles(simplifiedTypes) {
-  return simplifiedTypes.map((simplifiedType) => {
-    return {
+function mapTypesToFiles(commonjs) {
+  return (simplifiedTypes) =>
+    simplifiedTypes.map((simplifiedType) => ({
       name: simplifiedType.name,
-      body: generate(typeTemplate(simplifiedType)).code,
+      body: generate(typeTemplate(simplifiedType, commonjs)).code,
       path: filenameForType(simplifiedType)
-    };
-  });
+    }));
 }
 
-function injectBundle(rootTypeNames, bundleName) {
+function injectBundle(rootTypeNames, bundleName, commonjs) {
   return function(typeFileMaps) {
-    const bundleAst = bundleTemplate(rootTypeNames, typeFileMaps, bundleName.replace(' ', ''));
+    const bundleAst = bundleTemplate(rootTypeNames, typeFileMaps, bundleName.replace(' ', ''), commonjs);
     const bundle = generate(bundleAst).code;
 
     typeFileMaps.push({
@@ -74,15 +73,15 @@ function flow(arg, functions) {
   return functions.reduce(((acc, fn) => fn(acc)), arg);
 }
 
-export default function generateSchemaModules(introspectionResponse, bundleName, whitelistConfig) {
+export default function generateSchemaModules(introspectionResponse, bundleName, whitelistConfig, commonjs) {
   const schema = introspectionResponse.data.__schema;
 
   return flow(schema, [
     yieldTypes,
     filterTypes(whitelistConfig),
     simplifyTypes(whitelistConfig),
-    mapTypesToFiles,
-    injectBundle(extractRootTypeNames(schema), bundleName)
+    mapTypesToFiles(commonjs),
+    injectBundle(extractRootTypeNames(schema), bundleName, commonjs)
   ]);
 }
 

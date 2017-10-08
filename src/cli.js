@@ -33,7 +33,7 @@ function runCli() {
     });
 
   } else {
-    const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, whitelistConfig);
+    const files = generateSchemaModules(introspectionResponse, args.schemaBundleName, whitelistConfig, args.commonjs);
 
     mkdirp.sync(path.join(args.outdir, 'types'));
 
