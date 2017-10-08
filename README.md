@@ -35,6 +35,12 @@ modules, run the following command.
 graphql-js-schema --schema-file ./schema.json --outdir schema --schema-bundle-name="Types"
 ```
 
+### Optional support to CommonJS
+
+```bash
+graphql-js-schema --schema-file ./schema.json --outdir schema --schema-bundle-name="Types" --commonjs
+```
+
 This will create a directory called schema, and a root module called `Schema` in
 the file `schema/types.js`. It will also collect all the non-scalar types in
 `schema/types/`, and export them. The top level bundle exists for convenience,

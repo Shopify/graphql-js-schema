@@ -6,7 +6,10 @@ function shouldShowHelp(args) {
 
 export default function parseArgs(rawArgs) {
   const args = minimist(rawArgs, {
-    boolean: 'bundle-only',
+    boolean: [
+      'bundle-only',
+      'commonjs'
+    ],
     string: [
       'schema-file',
       'outdir',
@@ -15,7 +18,8 @@ export default function parseArgs(rawArgs) {
     ],
     default: {
       'schema-bundle-name': 'Schema',
-      'bundle-only': false
+      'bundle-only': false,
+      commonjs: false
     }
   });
 
@@ -28,6 +32,7 @@ export default function parseArgs(rawArgs) {
     outdir: args.outdir,
     schemaBundleName: args['schema-bundle-name'],
     bundleOnly: args['bundle-only'],
-    whitelistConfig: args['whitelist-config']
+    whitelistConfig: args['whitelist-config'],
+    commonjs: args.commonjs
   };
 }

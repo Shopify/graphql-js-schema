@@ -14,6 +14,7 @@ suite('parse-args-test', () => {
   test('it can parse passed args', () => {
     const opts = parseArgs([
       '--bundle-only',
+      '--commonjs',
       '--schema-bundle-name',
       'Types'
     ].concat(...requiredArgs));
@@ -22,6 +23,7 @@ suite('parse-args-test', () => {
     assert.equal(opts.outdir, 'whatever');
     assert.equal(opts.schemaBundleName, 'Types');
     assert.equal(opts.bundleOnly, true);
+    assert.equal(opts.commonjs, true);
   });
 
   test('it shows help when required args are missing', () => {

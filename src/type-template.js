@@ -8,16 +8,23 @@ function buildDeclaration(replacements) {
 
   return template(`const TYPE_NAME_IDENTIFIER = ${JSON.stringify(object, null, 2)};`)(replacements);
 }
-const buildExport = template('export default TYPE_NAME_IDENTIFIER;', {sourceType: 'module'});
 
-export default function typeTemplate(type) {
+function buildExport(replacements, commonjs) {
+  if (commonjs) {
+    return template('module.exports = TYPE_NAME_IDENTIFIER;', {sourceType: 'module'})(replacements);
+  }
+
+  return template('export default TYPE_NAME_IDENTIFIER;', {sourceType: 'module'})(replacements);
+}
+
+export default function typeTemplate(type, commonjs) {
   const replacements = {
     TYPE_NAME_IDENTIFIER: t.identifier(type.name),
     TYPE_HASH: type
   };
 
   const declaration = buildDeclaration(replacements);
-  const moduleExport = buildExport(replacements);
+  const moduleExport = buildExport(replacements, commonjs);
 
   switch (type.kind) {
     case 'OBJECT':
