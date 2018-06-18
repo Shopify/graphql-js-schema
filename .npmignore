@@ -9,3 +9,4 @@ demo/
 .npmignore
 LICENSE.md
 src/
+.travis.yml
